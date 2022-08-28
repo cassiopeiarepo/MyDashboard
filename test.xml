@@ -1,0 +1,13 @@
+<tmldef version="1.0" fileext="tsd">
+  
+  <nodetype name="">
+    <arg name="arg1" argtype="string" required="false"></arg>
+    <arg name="arg2" argtype="int" required="true"></arg>
+    <child nodetype="section"></child>
+  </nodetype>
+
+  <nodetype name="section">
+  
+  </nodetype>
+  
+</tmldef>

@@ -1,0 +1,6 @@
+[submodule "core"]
+	path = core
+	url = https://github.com/cassiopeiarepo/core.git
+[submodule "coreqt"]
+	path = coreqt
+	url = https://github.com/cassiopeiarepo/coreqt.git
