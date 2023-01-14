@@ -1,0 +1,27 @@
+<tmldef>
+
+  <tml_typedef_ref name="prop_count" type="int"></tml_typedef_ref>
+
+  <tml_typedef_enum name="propkind">
+    <enumitem name="In"></enumitem>
+    <enumitem name="Out"></enumitem>
+    <enumitem name="InOut"></enumitem>
+  </tml_typedef_enum>
+
+  <tml_typedef_regex name="datetime" pattern="a"></tml_typedef_regex>
+
+  <tml_nodedef type="node">
+  </tml_nodedef>
+  
+  <tml_nodedef type="place" derived="node">
+    <tml_nodedef_arg name="name" type="string" />
+    <tml_nodedef_arg name="description" type="string" optional="true" />
+    
+    <tml_nodedef_child name="location"  type="geo_loaction" />
+  </tml_nodedef>
+
+  <tml_nodedef type="transform2d" derived="node">
+    <tml_nodedef_child_list type="node" derived="true" />
+  </tml_nodedef>
+    
+</tmldef>

@@ -1,0 +1,7 @@
+#ifndef TRIVIAL_SIGNALSLOT_VIEW_H
+#define TRIVIAL_SIGNALSLOT_VIEW_H
+
+
+
+
+#endif
