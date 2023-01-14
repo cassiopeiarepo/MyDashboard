@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QGridLayout>
 #include <QWidget>
+#include <QMainWindow>
 
 /*
     Pc: 2560x1377
@@ -50,6 +51,8 @@ public:
 
     QPoint getGloabalPos() { return global_pos; }
 
+    QMainWindow* getMainWindow() { return main_window; }
+
     void addChildWidgetAndFillInGrid(QWidget* parent, QWidget* child) {
         QGridLayout* gridLayout_3 = new QGridLayout(parent);
         gridLayout_3->setObjectName(child->objectName() + "_fill_grid");
@@ -65,9 +68,11 @@ private:
     QPoint global_pos;
     GuiSize size;
     GuiSize prev_size;
+    QMainWindow* main_window;
 
     void updateSize(int new_width, int new_height);
     void updateGlobalPos(QPoint _gloabal_pos);
+    void setMainWindow(QMainWindow* _main_window) { main_window = _main_window; }
 
     friend class TrivialMainWindow;
 };

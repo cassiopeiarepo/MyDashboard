@@ -204,6 +204,7 @@ TrivialMainWindow::TrivialMainWindow(QWidget* parent) {
 	resize(360, 747); // telefon
 	//resize(1333, 716); //tablet
 
+    Gui::get()->setMainWindow(this);
     Gui::get()->updateSize(width(), height());
 
     createGui();
@@ -272,20 +273,16 @@ void TrivialMainWindow::createGui() {
     centralwidget->setObjectName("centralwidget");
     this->setCentralWidget(centralwidget);
 
-    /*
+
     if (Gui::get()->getSize() == Gui::GUI_MINI) {
 
-		//ui_main_menu_mini.setupUi(centralwidget);
-		//scene_view_complex = new TrivialSceneComplexView(NULL);
-		//Gui::get()->addChildWidgetAndFillInGrid(ui_main_menu_mini.child_widget_placeholder, scene_view_complex);
-
-		scene_view_complex = new TrivialSceneComplexView(NULL);
-		scene_tree_view = new TrivialSceneTreeView(NULL);
-		QObject::connect(scene_tree_view, &TrivialSceneTreeView::selected, scene_view_complex, &TrivialSceneComplexView::select);
+        //scene_view_complex = new TrivialSceneComplexView(NULL);
+        scene_tree_view = new TrivialSceneTreeView(NULL);
+        //QObject::connect(scene_tree_view, &TrivialSceneTreeView::selected, scene_view_complex, &TrivialSceneComplexView::select);
 
 		main_view = new TrivialMainView(centralwidget, false);
-		main_view->addTopMenu("Tree", ":/icons/ui/icons/home_FILL0_wght400_GRAD0_opsz48.png", scene_tree_view);
-		main_view->addTopMenu(QString("Scene"),":/icons/ui/icons/home_FILL0_wght400_GRAD0_opsz48.png",  scene_view_complex);
+        main_view->addTopMenu("Tree", ":/icons/ui/icons/home_FILL0_wght400_GRAD0_opsz48.png", scene_tree_view);
+        //main_view->addTopMenu(QString("Scene"),":/icons/ui/icons/home_FILL0_wght400_GRAD0_opsz48.png",  scene_view_complex);
 		main_view->addTopMenu(QString("Windows"), ":/icons/ui/icons/home_FILL0_wght400_GRAD0_opsz48.png", NULL);
 		main_view->addSubMenu("Windows", "Sub1", NULL);
 		main_view->addTopMenu(QString("Log"), ":/icons/ui/icons/home_FILL0_wght400_GRAD0_opsz48.png",  log_view);
@@ -294,7 +291,9 @@ void TrivialMainWindow::createGui() {
 
 		main_view->select("Log", "");
 
-    } else if (Gui::get()->getSize() == Gui::GUI_MIDI) {
+    }
+
+    /*else if (Gui::get()->getSize() == Gui::GUI_MIDI) {
 		ui_main_menu_midi.setupUi(centralwidget);
     } else if (Gui::get()->getSize() == Gui::GUI_MAXI && Gui::get()->isDesktop()) {
 
@@ -336,7 +335,7 @@ void TrivialMainWindow::updateGui() {
 }
 
 void TrivialMainWindow::init() {
-    //scene_tree_view->setRoot(Workspace::get()->getRoot());
+    scene_tree_view->setRoot(Workspace::get()->getRoot());
 }
 
 void TrivialMainWindow::deleteCentralWidgetChilds() {

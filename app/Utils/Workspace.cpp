@@ -32,7 +32,7 @@
 
 void Workspace::init(QString _dir) {
 
-	TypeSystem::get()->init();
+    //TypeSystem::get()->init();
 
 	//loadDefaultFile(_dir);
 
@@ -57,13 +57,15 @@ void Workspace::init(QString _dir) {
 	event3->setObjectName("event3");
 	event3->setParent(dummy1);
 
+    /*
 	QList<NodeEvent*> events = Calendar::get()->getEvents(2022, 06, 16);
 
 	for (NodeEvent* event : events) {
 		qInfo() << "Event " << event->getStart();
 	}
+    */
 
-	Script::get()->init();
+    //Script::get()->init();
 }
 
 void Workspace::loadDefaultFile(QString _dir) {

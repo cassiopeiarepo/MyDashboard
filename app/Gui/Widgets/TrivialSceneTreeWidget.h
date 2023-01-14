@@ -82,7 +82,7 @@ public:
     TrivialSceneTreeWidget(QWidget* parent = nullptr);
     ~TrivialSceneTreeWidget();
 
-    void setRoot(QObject* root) { model->setRoot(root); }
+    void setRoot(QObject* root);
 
 signals:
     void selected(QObject* obj);
@@ -98,7 +98,7 @@ protected:
 
 private:
     TrivialSceneTreeModel* model;
-    QMenu* m_contextMenu;
+    //QMenu* m_contextMenu;
 
     QPoint m_pressPos;
     bool m_longPress;

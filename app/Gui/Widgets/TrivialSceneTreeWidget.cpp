@@ -12,7 +12,7 @@ void NewNodeDialog::onReleased() {
 
 
 TrivialSceneTreeModel::TrivialSceneTreeModel(QObject* parent)
-    : QAbstractItemModel(parent)
+    : QAbstractItemModel(parent), rootItem(NULL)
 {
 
 }
@@ -25,6 +25,9 @@ TrivialSceneTreeModel::~TrivialSceneTreeModel()
 QModelIndex TrivialSceneTreeModel::index(int row, int column, const QModelIndex& parent) const
 {
     if (!hasIndex(row, column, parent))
+        return QModelIndex();
+
+    if (!rootItem)
         return QModelIndex();
 
     QObject* parentItem;
@@ -121,17 +124,30 @@ TrivialSceneTreeWidget::TrivialSceneTreeWidget(QWidget* parent)
     QObject::connect(this, &QAbstractItemView::clicked,
         this, &TrivialSceneTreeWidget::onActivated);
 
-    m_contextMenu = new QMenu(this);
-    QAction* action = m_contextMenu->addAction("New");
-    QObject::connect(action, &QAction::triggered, this, &TrivialSceneTreeWidget::onNewNodeActionTriggered);
+    //this->expandToDepth(0);
 
 
-    m_contextMenu->addAction("Option 2");
+
+//#ifdef Q_OS_ANDROID
+    //this->setStyleSheet("QTreeView { font-size: 20pt; }");
+
+    //this->setStyleSheet("QTreeView { font-size: 20pt; } ");
+                        //"QTreeView::branch:open:has-children { width: 40px; height: 40px;  } "
+                        //"QTreeView::branch:closed:has-children { width: 40px; height: 40px; } ");
+
+//#endif
+
 
 }
 
+void TrivialSceneTreeWidget::setRoot(QObject* root) {
+    model->setRoot(root);
+    QModelIndex index = model->index(0, 0, QModelIndex());
+    this->expand(index);
+}
+
 TrivialSceneTreeWidget::~TrivialSceneTreeWidget() {
-    delete m_contextMenu;
+    //delete m_contextMenu;
 }
 
 
@@ -168,10 +184,20 @@ void TrivialSceneTreeWidget::mousePressEvent(QMouseEvent* event)
 void TrivialSceneTreeWidget::mouseReleaseEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton && m_longPress) {
+        QMenu* m_contextMenu = new QMenu(Gui::get()->getMainWindow());
+        QAction* action = m_contextMenu->addAction("New");
+        QObject::connect(action, &QAction::triggered, this, &TrivialSceneTreeWidget::onNewNodeActionTriggered);
+        m_contextMenu->addAction("Option 2");
+        connect(m_contextMenu, &QMenu::aboutToHide, m_contextMenu, &QMenu::deleteLater);
+
+        QSize size = m_contextMenu->sizeHint();
+        //size.setWidth(100);
+        m_contextMenu->setFixedSize(100, size.height());
+
         m_contextMenu->exec(viewport()->mapToGlobal(m_pressPos));
     }
     else {
-        // kod dla klikniêcia
+        
     }
     QTreeView::mouseReleaseEvent(event);
 }
