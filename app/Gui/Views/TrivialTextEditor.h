@@ -1,7 +1,7 @@
 #ifndef TRIVIALTEXTEDITOR_H
 #define TRIVIALTEXTEDITOR_H
 
-#include "core/types/Base.h"
+#include "coreqt/Utils/Base.h"
 
 #include <QWidget>
 #include <QScrollBar>

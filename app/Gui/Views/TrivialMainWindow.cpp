@@ -259,17 +259,20 @@ void TrivialMainWindow::createGui() {
 
 	log_view = new TrivialLogView();
 
+    /*
 	if (Gui::get()->isDesktop()) {
 		
 		dir_explorer = new TrivialDirExplorer();
 		doc_view = TrivialDocumentsView::get();
 		script_view = new TrivialScriptView();
 	}
+    */
 
     centralwidget = new QWidget(this);
     centralwidget->setObjectName("centralwidget");
     this->setCentralWidget(centralwidget);
 
+    /*
     if (Gui::get()->getSize() == Gui::GUI_MINI) {
 
 		//ui_main_menu_mini.setupUi(centralwidget);
@@ -303,9 +306,11 @@ void TrivialMainWindow::createGui() {
         addPanel(PanelPlace::BOTTOM_LEFT, QString("Script"), script_view);
         addPanel(PanelPlace::BOTTOM_RIGHT, QString("Log"), log_view);
     }
+    */
 }
 
 void TrivialMainWindow::updateGui() {
+    /*
 	if (Gui::get()->getSize() != Gui::get()->getPrevSize()) {
 		deleteCentralWidgetChilds();
 
@@ -326,11 +331,12 @@ void TrivialMainWindow::updateGui() {
 			addPanel(PanelPlace::BOTTOM_RIGHT, QString("Log"), log_view);		
 		}
 	}
+        */
 
 }
 
 void TrivialMainWindow::init() {
-	scene_tree_view->setRoot(Workspace::get()->getRoot());
+    //scene_tree_view->setRoot(Workspace::get()->getRoot());
 }
 
 void TrivialMainWindow::deleteCentralWidgetChilds() {

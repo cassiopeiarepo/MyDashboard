@@ -1,7 +1,6 @@
 #ifndef __NODE_BASE_H__
 #define __NODE_BASE_H__
 
-#include "core/node/Node.h"
 #include "coreqt/Common/Tml.h"
 #include "coreqt/Utils/Tags.h"
 

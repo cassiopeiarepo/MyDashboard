@@ -1,7 +1,6 @@
 #ifndef __TMLDEF_H__
 #define __TMLDEF_H__
 
-#include "core/types/Str.h"
 #include "coreqt/Common/Tml.h"
 
 #include <QString>

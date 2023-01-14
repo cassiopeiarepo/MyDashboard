@@ -2,7 +2,7 @@
 #define _TRIVIAL_DOCUMENTS_VIEW_H
 
 #include <QTabWidget>
-#include <core/utils/Singleton.h>
+#include <coreqt/Utils/Singleton.h>
 
 class TrivialTextEditor;
 

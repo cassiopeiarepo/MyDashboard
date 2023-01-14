@@ -19,6 +19,8 @@
 #ifndef __SINGLETON_H__
 #define __SINGLETON_H__
 
+#include "coreqt/Utils/Base.h"
+
 template <class Type> class Singleton {
 
 	/*

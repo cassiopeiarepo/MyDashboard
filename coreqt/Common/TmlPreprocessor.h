@@ -1,8 +1,6 @@
 #ifndef __TML_PREPROCESSOR_H__
 #define __TML_PREPROCESSOR_H__
 
-#include "core/types/Str.h"
-
 #include "coreqt/Common/Tml.h"
 
 #include <QString>

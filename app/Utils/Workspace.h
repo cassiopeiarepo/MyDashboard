@@ -1,8 +1,8 @@
 #ifndef __WORKSPACE_H__
 #define __WORKSPACE_H__
 
-#include "core/types/Base.h"
-#include "core/utils/Singleton.h"
+#include "coreqt/Utils/Base.h"
+#include "coreqt/Utils/Singleton.h"
 #include "coreqt/Common/Tml.h"
 #include "app/Nodes/NodeBase.h"
 

@@ -1,7 +1,7 @@
 #ifndef __GUI_H__
 #define __GUI_H__
 
-#include "core/utils/singleton.h"
+#include "coreqt/Utils/singleton.h"
 
 #include <QObject>
 #include <QGridLayout>
