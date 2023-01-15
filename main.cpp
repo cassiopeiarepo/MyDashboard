@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 
 #include <QApplication>
+#include <QStyleFactory>
 #include "coreqt/Common/tml.h"
 
 #include "app/Utils/Workspace.h"
@@ -9,25 +10,13 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
-    
-
-    //testTml(QString("c:\\DashboardTest\\"));
-
-    //MainWindow w;
-    //w.show();
+    QApplication::setStyle(QStyleFactory::create("Fusion"));
 
     TrivialMainWindow w;
 
     Workspace::get()->init("D:/Workspace");
     w.init();
     w.show();
-
-    //QMainWindow win1;
-    //win1.show();
-
-    //QMainWindow win2;
-    //win2.show();
 
     return a.exec();
 }

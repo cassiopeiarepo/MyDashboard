@@ -31,175 +31,6 @@
 #include "app/Utils/Workspace.h"
 
 
-//#include <mono-2.0/mono/metadata/assembly.h>
-
-/*
-
-MonoPlugin::MonoPlugin() : is_loaded(false), assembly(NULL), mono_image(NULL), domain(NULL) {
-
-}
-
-MonoPlugin::~MonoPlugin() {
-
-	if (domain) {
-		mono_jit_cleanup(domain);
-	}
-}
-
-
-bool MonoPlugin::Load(QString filename) {
-
-	domain = mono_jit_init("dd");
-
-	if (domain) {
-		assembly = mono_domain_assembly_open(domain, "MyDashboardPlugin.dll");
-		if (assembly) {
-			mono_image = mono_assembly_get_image(assembly);
-			if (mono_image)
-				is_loaded = true;
-		}
-	}
-	return true;
-}
-
-
-void MonoPlugin::RunMethodInClass(QString& class_namespace, QString& class_name, QString& method_name) {
-
-	if (is_loaded) {
-		MonoClass* main_class = mono_class_from_name(mono_image, qstring_to_char_array(class_namespace), qstring_to_char_array(class_name));
-
-		if (main_class) {
-			MonoMethodDesc* method_desc = mono_method_desc_new(qstring_to_char_array(method_name), false);
-			if (method_desc) {
-				MonoMethod* method = mono_method_desc_search_in_class(method_desc, main_class);
-				if (method) {
-					mono_runtime_invoke(method, NULL, NULL, NULL);
-
-				}
-			}
-		}
-
-		// wyszukac wszystkie klasy dziedziczone od Component
-
-		// strzorzenie nowej instancji
-	}
-
-}
-
-void MonoPlugin::RunSetString(QString& str) {
-	if (is_loaded) {
-		MonoClass* main_class = mono_class_from_name(mono_image, "MyDashboardPlugin", "MyDashboardUtils");
-
-		if (main_class) {
-			MonoMethodDesc* method_desc = mono_method_desc_new(".MyDashboardUtils:SetString(string)", false);
-			if (method_desc) {
-				MonoMethod* method = mono_method_desc_search_in_class(method_desc, main_class);
-				if (method) {
-					MonoObject* ptrExObject = NULL;
-
-					//void* args[1];
-
-					MonoString* val = mono_string_new(domain, str.toUtf8().data());
-
-					// Note we put the address of the value type in the args array
-					//args[0] = &val;
-					MonoArray* params = mono_array_new(mono_domain_get(), mono_get_object_class(),  1);
-
-					MonoObject* boxed_param = (MonoObject*) val;// = GDMonoMarshal::variant_to_mono_object(p_params[i], param_types[i]);
-					mono_array_setref(params, 0, boxed_param);
-
-					MonoObject* result_object = mono_runtime_invoke_array(method, NULL, params, &ptrExObject);
-				}
-			}
-		}
-
-		// wyszukac wszystkie klasy dziedziczone od Component
-
-		// strzorzenie nowej instancji
-	}
-}
-
-QString MonoPlugin::RunGetString() {
-	
-	if (is_loaded) {
-		MonoClass* main_class = mono_class_from_name(mono_image,"MyDashboardPlugin", "MyDashboardUtils");
-
-		if (main_class) {
-			MonoMethodDesc* method_desc = mono_method_desc_new(".MyDashboardUtils:GetString()", false);
-			if (method_desc) {
-				MonoMethod* method = mono_method_desc_search_in_class(method_desc, main_class);
-				if (method) {
-					MonoObject* ptrExObject = NULL;
-
-					MonoObject* result_object = mono_runtime_invoke(method, NULL, NULL, &ptrExObject);
-
-					if (result_object) {
-
-						MonoString* str_result = mono_object_to_string(result_object, NULL);
-						QString qstr = QString::fromUtf8(mono_string_to_utf8(str_result));
-						return qstr;
-					}
-					
-				}
-			}
-		}
-
-		// wyszukac wszystkie klasy dziedziczone od Component
-
-		// strzorzenie nowej instancji
-	}
-}
-
-Vector<QString> MonoPlugin::RunGetDerivedClass(QString& base_class) {
-
-	Vector<QString> result;
-
-	if (is_loaded) {
-		MonoClass* main_class = mono_class_from_name(mono_image, "MyDashboardPlugin", "MyDashboardUtils");
-
-		if (main_class) {
-			MonoMethodDesc* method_desc = mono_method_desc_new(".MyDashboardUtils:GetDerivedClasses(string)", false);
-			if (method_desc) {
-				MonoMethod* method = mono_method_desc_search_in_class(method_desc, main_class);
-				if (method) {
-					MonoObject* ptrExObject = NULL;
-
-					MonoString* val = mono_string_new(domain, base_class.toUtf8().data());
-
-					MonoArray* params = mono_array_new(mono_domain_get(), mono_get_object_class(), 1);
-
-					MonoObject* boxed_param = (MonoObject*)val;
-					mono_array_setref(params, 0, boxed_param);
-
-					MonoObject* result_object = mono_runtime_invoke_array(method, NULL, params, &ptrExObject);
-
-					if (result_object) {
-
-						MonoArray* result_array = (MonoArray*) result_object;
-						
-						for (int i = 0; i < mono_array_length(result_array); i++) {
-							MonoString* str_result = (MonoString*) mono_array_get(result_array, MonoString*
-							//mono_get_string_class()
-							, i);
-							QString qstr = QString::fromUtf8(mono_string_to_utf8(str_result));
-							result.append(qstr);
-						}
-					}
-
-				}
-			}
-		}
-
-		return result;
-
-		// wyszukac wszystkie klasy dziedziczone od Component
-
-		// strzorzenie nowej instancji
-	}
-}
-
-*/
-
 TrivialMainWindow::TrivialMainWindow(QWidget* parent) {
 	resize(360, 747); // telefon
 	//resize(1333, 716); //tablet
@@ -208,46 +39,6 @@ TrivialMainWindow::TrivialMainWindow(QWidget* parent) {
     Gui::get()->updateSize(width(), height());
 
     createGui();
-
-	/*
-	QHostAddress adress("127.0.0.1");
-	publisher = new Publisher(adress, EXAMPLE_PORT, this);
-	publisher->connectToHost();
-	
-	mono_set_dirs(".", ".");
-
-	
-	mono = new MonoPlugin();
-
-	mono->Load("MyDashboardPlugin.dll");
-
-	if (mono->IsLoaded()) 
-	{
-		
-		//QString class_namespace("MyDashboardPlugin");
-		//QString class_name("MyDashboardUtils");
-		//QString method_name(".MyDashboardUtils.PrintToConsole()");
-		//mono->RunMethodInClass(class_namespace, class_name, method_name);
-
-
-		QString qstr = mono->RunGetString();
-		Log::get()->message("Result1: %s", qstr.toLatin1().data());
-
-		mono->RunSetString(QString("trele morele"));
-
-		qstr = mono->RunGetString();
-		Log::get()->message("Result2: %s", qstr.toLatin1().data());
-
-		Log::get()->message("DerivedClass: ");
-
-		Vector<QString> derived = mono->RunGetDerivedClass(QString(""));
-
-		for (int i = 0; i < derived.size(); i++) {
-			Log::get()->message("%s", derived[i].toLatin1().data());
-		}
-	}
-	*/
-
 
 }
 
@@ -276,13 +67,13 @@ void TrivialMainWindow::createGui() {
 
     if (Gui::get()->getSize() == Gui::GUI_MINI) {
 
-        //scene_view_complex = new TrivialSceneComplexView(NULL);
+        scene_view_complex = new TrivialSceneComplexView(NULL);
         scene_tree_view = new TrivialSceneTreeView(NULL);
-        //QObject::connect(scene_tree_view, &TrivialSceneTreeView::selected, scene_view_complex, &TrivialSceneComplexView::select);
+        QObject::connect(scene_tree_view, &TrivialSceneTreeView::selected, scene_view_complex, &TrivialSceneComplexView::select);
 
 		main_view = new TrivialMainView(centralwidget, false);
         main_view->addTopMenu("Tree", ":/icons/ui/icons/home_FILL0_wght400_GRAD0_opsz48.png", scene_tree_view);
-        //main_view->addTopMenu(QString("Scene"),":/icons/ui/icons/home_FILL0_wght400_GRAD0_opsz48.png",  scene_view_complex);
+        main_view->addTopMenu(QString("Scene"),":/icons/ui/icons/home_FILL0_wght400_GRAD0_opsz48.png",  scene_view_complex);
 		main_view->addTopMenu(QString("Windows"), ":/icons/ui/icons/home_FILL0_wght400_GRAD0_opsz48.png", NULL);
 		main_view->addSubMenu("Windows", "Sub1", NULL);
 		main_view->addTopMenu(QString("Log"), ":/icons/ui/icons/home_FILL0_wght400_GRAD0_opsz48.png",  log_view);

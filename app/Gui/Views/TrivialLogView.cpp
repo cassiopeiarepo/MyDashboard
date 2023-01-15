@@ -15,8 +15,8 @@ void TrivialLogView::createHeaders() {
 	setColumnCount(3);
 
 	setHeaderLabels(QStringList() << "Time " << "Type" << "Description");
-	setColumnWidth(0, 100);
-	setColumnWidth(1, 100);
+	setColumnWidth(0, 110);
+	setColumnWidth(1, 55);
 	setColumnWidth(2, 600);
 }
 
@@ -24,7 +24,7 @@ void TrivialLogView::logMessageHandler(QtMsgType msg_type, const QMessageLogCont
 	if (log_view == NULL) return;
 
 	QTreeWidgetItem* item = new QTreeWidgetItem(log_view);
-	item->setText(0, QDateTime::currentDateTime().toString());
+	item->setText(0, QDateTime::currentDateTime().toString("hh:mm:ss dd/MM"));
 	item->setText(1, log_view->msgTypeToString(msg_type));
 	item->setText(2, msg);
 	log_view->addTopLevelItem(item);
