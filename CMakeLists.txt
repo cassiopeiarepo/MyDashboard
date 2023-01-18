@@ -91,7 +91,8 @@ set(PROJECT_SOURCES
 				app/Nodes/TmlDef/NodeTmlTypeDefRegex.h
 				app/Nodes/TmlDef/NodeTmlTypeDefRegex.cpp
 				
-				
+				app/Gui/Widgets/TrivialSceneWidget.h
+				app/Gui/Widgets/TrivialSceneWidget.cpp
 				app/Gui/Widgets/TrivialSceneTreeWidget.h
 				app/Gui/Widgets/TrivialSceneTreeWidget.cpp
 				
