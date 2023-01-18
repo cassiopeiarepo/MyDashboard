@@ -6,28 +6,71 @@
 #include <QVBoxLayout>
 #include <QToolButton>
 #include <QCoreApplication>
+#include <QTextEdit>
+#include <QScrollArea>
+#include <QTimer>
 
 #include "app/Utils/Workspace.h"
+
+class TrivialSceneWidget;
+class TrivialSceneComplexView;
+
+class ObjectNameLabel : public QLabel {
+    Q_OBJECT
+ public:
+    ObjectNameLabel(QWidget* parent) : QLabel(parent) { }
+
+    void mousePressEvent(QMouseEvent *event) override {
+        QTimer::singleShot(1, this, &ObjectNameLabel::onTimer);
+        QLabel::mousePressEvent(event);
+    }
+
+signals:
+    void onMousePress();
+
+public slots:
+    void onTimer() {
+        emit onMousePress();
+    }
+};
+
 
 class TrivialSceneItemWidget : public QWidget {
 	Q_OBJECT
 
 public:
-    TrivialSceneItemWidget(QWidget* parent, NodeBase* obj);
+    TrivialSceneItemWidget(TrivialSceneWidget* _scene_widget, NodeBase* obj);
     ~TrivialSceneItemWidget();
 	NodeBase* getObject() { return object; }
 
 	void update();
 
-	void resizeEvent(QResizeEvent* event);
+    void resizeEvent(QResizeEvent* event) override;
+
+    void setShowHeaders(bool show_headers);
+
+public slots:
+    void onObjectNamePressed();
+
+    void aboutTiHideOptionsMenu();
+    void recreateOptionsMenu();
 
 private:
     NodeBase* object;
+    TrivialSceneWidget* scene_widget;
 
+    QGridLayout *gridLayout;
+    QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout_2;
+    QToolButton *toolButton_3;
+    ObjectNameLabel *label_2;
+    QTextEdit *textEdit;
 
-	QLabel* name_label;
 	void createWidget();
 	void updateSize();
+
+    QMenu* optionsMenu;
+    void createOptionsMenu();
 
 };
 
@@ -43,12 +86,35 @@ public:
         selected = sel; rebuildChilds();
     }
 
+    bool getShowHeaders() { return show_headers; }
+    void setShowHeaders(bool _show_headers);
+
     int getClientWidth() { return clientWidth; }
+
+    void resizeEvent(QResizeEvent* event) override {
+        //rebuildChilds();
+    }
+
+    void select(NodeBase* object);
+
+signals:
+    void goChild(NodeBase* child);
+
 
 private:
     NodeBase* selected;
-	QVBoxLayout* verticalLayout;
+    bool show_headers;
+
     QList<TrivialSceneItemWidget*> items;
+
+    QGridLayout *gridLayout_2;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QGridLayout *gridLayout;
+    QVBoxLayout *verticalLayout;
+
+    QWidget* expand_widget;
+
     int clientWidth;
 
 	void createWidget();
@@ -75,6 +141,7 @@ public:
         SceneViewComplex->resize(400, 300);
         gridLayout = new QGridLayout(SceneViewComplex);
         gridLayout->setObjectName("gridLayout");
+        gridLayout->setContentsMargins(0, 0, 0, 0);
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName("verticalLayout");
         horizontalLayout = new QHBoxLayout();
@@ -108,9 +175,7 @@ public:
 
         verticalLayout->addWidget(widget);
 
-
         gridLayout->addLayout(verticalLayout, 0, 0, 1, 1);
-
 
         retranslateUi(SceneViewComplex);
 
@@ -138,12 +203,19 @@ public slots:
     void select(QObject* obj);
 
     void onUp();
+    void onGoChild(NodeBase* child);
 
+    void aboutTiHideOptionsMenu();
+    void recreateOptionsMenu();
+
+    void optionsShowHeadersTriggered(bool checked);
 private:
     Ui_SceneViewComplex scene_view_complex;
     TrivialSceneWidget* scene_widget;
 
+    QMenu* optionsMenu;
     void createWidget();
+    void createOptionsMenu();
 };
 
 

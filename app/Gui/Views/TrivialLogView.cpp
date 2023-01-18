@@ -15,8 +15,8 @@ void TrivialLogView::createHeaders() {
 	setColumnCount(3);
 
 	setHeaderLabels(QStringList() << "Time " << "Type" << "Description");
-	setColumnWidth(0, 110);
-	setColumnWidth(1, 55);
+    setColumnWidth(0, 120);
+    setColumnWidth(1, 60);
 	setColumnWidth(2, 600);
 }
 

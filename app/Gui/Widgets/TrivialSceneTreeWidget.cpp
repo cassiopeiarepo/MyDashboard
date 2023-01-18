@@ -6,6 +6,13 @@
 #include "app/Utils/Gui.h"
 
 
+void list_children(QObject* parent) {
+    QObjectList childs = parent->children();
+    for (int i =0; i < childs.size(); i++) {
+        qDebug() << "child " << childs[i];
+    }
+}
+
 void NewNodeDialog::onReleased() {
     qDebug() << "onToogled " << QObject::sender();
 }

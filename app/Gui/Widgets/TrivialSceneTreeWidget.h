@@ -7,6 +7,12 @@
 #include <QDialog>
 #include <QToolButton>
 #include <QResizeEvent>
+#include <QGestureEvent>
+#include <QMouseEvent>
+#include <QTextEdit>
+
+void list_children(QObject* parent) ;
+
 
 class NewNodeDialog : public QDialog {
     Q_OBJECT
@@ -31,6 +37,21 @@ public:
         button2->move(10, 600);
         button2->setText("button2");
         QObject::connect(button2, &QAbstractButton::released, this, &NewNodeDialog::onReleased);
+
+        edit = new QTextEdit(child);
+        edit->move(10, 100);
+        edit->resize(100, 100);
+
+        list_children(edit);
+
+        child->installEventFilter(this);
+
+        QObjectList obj_list = child->children();
+        for (int i = 0; i < obj_list.size(); i++) {
+            qDebug() << " installEventFilter" << obj_list[i];
+            obj_list[i]->installEventFilter(this);
+        }
+
     }
 
     void resizeEvent(QResizeEvent* event) override {
@@ -38,12 +59,88 @@ public:
     }
 
 
+
+    /*
+    bool event(QEvent *event) override {
+        //qDebug() << "event " << event->type();
+        if (event->type() == QEvent::MouseButtonPress) {
+            qDebug() << " MouseButtonPress";
+
+        } else  if (event->type() == QEvent::MouseMove) {
+            QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+
+        } else if (event->type() == QEvent::Gesture) {
+                //qDebug() << "gesture";
+
+                QGestureEvent *gestureEvent = static_cast<QGestureEvent*>(event);
+                if (QGesture *pan = gestureEvent->gesture(Qt::PanGesture)) {
+
+                    qDebug() << " Pan gesture";
+
+                    QPanGesture *panGesture = static_cast<QPanGesture*>(pan);
+                    QPointF delta = panGesture->delta();
+                    if (delta.y() > 0) {
+                        // Przesuwanie w dół
+                        child->move(this->x(), this->y() + delta.y());
+                    } else {
+                        // Przesuwanie w górę
+                        child->move(this->x(), this->y() + delta.y());
+                    }
+                    return true;
+
+                }
+
+            }
+
+        return QDialog::event(event);
+
+    }
+    */
+
+
 public slots:
     void onReleased();
     
+protected:
+    bool eventFilter(QObject *obj, QEvent *event) override {
+        if (event->type() == QEvent::MouseButtonPress) {
+            qDebug() << " mousebuttonpress";
+            QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+            mouse_button_press_widget = qobject_cast<QWidget*>(obj);
+            start_mouse_pos = mouse_button_press_widget->mapToGlobal(mouseEvent->pos());
+            start_child_pos = child->pos();
+        } else if (event->type() == QEvent::MouseMove) {
+            QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+            if (obj == mouse_button_press_widget) {
+                QPoint mouse_pos = mouse_button_press_widget->mapToGlobal(mouseEvent->pos());
+                QPoint diff = mouse_pos - start_mouse_pos;
+                diff.setX(0);
+                QPoint new_pos = start_child_pos + diff;
+
+                if (new_pos.y() > 0) {
+                    new_pos.setY(0);
+                } else if (new_pos.y() < -(child->size().height() - this->size().height())){
+                    new_pos.setY(-(child->size().height() - this->size().height()));
+                }
+
+                child->move(new_pos);
+            }
+        }
+
+        return QWidget::eventFilter(obj, event);
+    }
+
+
+
+
 private:
+    QPoint start_child_pos;
+    QPoint start_mouse_pos;
+    QWidget* mouse_button_press_widget;
+
     QWidget* child;
     QToolButton* button1, *button2;
+    QTextEdit* edit;
 
 };
 
