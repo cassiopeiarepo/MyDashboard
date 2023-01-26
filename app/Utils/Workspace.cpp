@@ -30,6 +30,8 @@
 
 #include "coreqt/Common/TmlDef.h"
 
+#include "app/Gui/PropertyWidgets/NodePropTest.h"
+
 void Workspace::init(QString _dir) {
 
     //TypeSystem::get()->init();
@@ -45,8 +47,8 @@ void Workspace::init(QString _dir) {
 	dummy1->setObjectName("Calendar");
 	dummy1->setParent(dummy_root);
 	
-	NodeEvent* event1 = new NodeEvent();
-	event1->setObjectName("event1");
+    NodePropTest* event1 = new NodePropTest();
+    event1->setObjectName("prop_test");
 	event1->setParent(dummy1);
 
 	NodeEvent* event2 = new NodeEvent();

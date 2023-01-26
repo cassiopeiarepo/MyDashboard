@@ -5,7 +5,7 @@
 #include "coreqt/Common/tml.h"
 
 #include "app/Utils/Workspace.h"
-#include "app/Gui/Views/TrivialMainWindow.h"
+#include "app/Gui/Windows/TrivialMainWindow.h"
 
 int main(int argc, char *argv[])
 {

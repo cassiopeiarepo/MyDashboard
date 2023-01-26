@@ -75,6 +75,20 @@ set(PROJECT_SOURCES
 				app/Nodes/Pim/NodeProject.cpp
 				app/Nodes/Pim/NodeTask.h
 				app/Nodes/Pim/NodeTask.cpp
+				app/Nodes/Basic/NodeText.h
+				app/Nodes/Basic/NodeText.cpp
+				app/Nodes/Basic/NodeHeading1.h
+				app/Nodes/Basic/NodeHeading1.cpp
+				app/Nodes/Basic/NodeHeading2.h
+				app/Nodes/Basic/NodeHeading2.cpp
+				app/Nodes/Basic/NodeHeading3.h
+				app/Nodes/Basic/NodeHeading3.cpp
+				app/Nodes/Basic/NodeLink.h
+				app/Nodes/Basic/NodeLink.cpp
+				app/Nodes/Media/NodeImage.h
+				app/Nodes/Media/NodeImage.cpp
+				app/Nodes/Media/NodeVideo.h
+				app/Nodes/Media/NodeVideo.cpp
 				
 				app/Nodes/TmlDef/NodeTmlDef.h
 				app/Nodes/TmlDef/NodeTmlDef.cpp
@@ -95,6 +109,8 @@ set(PROJECT_SOURCES
 				app/Gui/Widgets/TrivialSceneWidget.cpp
 				app/Gui/Widgets/TrivialSceneTreeWidget.h
 				app/Gui/Widgets/TrivialSceneTreeWidget.cpp
+				app/Gui/Widgets/TrivialQObjectPropertyWidget.h
+				app/Gui/Widgets/TrivialQObjectPropertyWidget.cpp
 				
                 app/Gui/Views/TrivialTextEditor.h
                 app/Gui/Views/TrivialTextEditor.cpp
@@ -110,8 +126,7 @@ set(PROJECT_SOURCES
 				app/Gui/Views/TrivialDirExplorer.cpp
 				app/Gui/Views/TrivialDocumentsView.h
 				app/Gui/Views/TrivialDocumentsView.cpp
-				app/Gui/Views/TrivialMainWindow.h
-				app/Gui/Views/TrivialMainWindow.cpp
+
 				app/Gui/Views/TrivialTextDocument.h
 				app/Gui/Views/TrivialTextDocument.cpp
 				app/Gui/Views/TrivialScriptView.h
@@ -126,6 +141,33 @@ set(PROJECT_SOURCES
 				app/Gui/Views/TrivialMainView.cpp
 				app/Gui/Views/TrivialSignalSlotView.h
 				app/Gui/Views/TrivialSignalSlotView.cpp
+				
+				app/Gui/Windows/TrivialMainWindow.h
+				app/Gui/Windows/TrivialMainWindow.cpp
+				app/Gui/Windows/TrivialQObjectPropertyWindow.h
+				app/Gui/Windows/TrivialQObjectPropertyWindow.cpp
+				
+				
+				app/Gui/PropertyWidgets/ITrivialPropertyWidget.h
+				app/Gui/PropertyWidgets/NodePropTest.h
+				app/Gui/PropertyWidgets/NodePropTest.cpp
+				app/Gui/PropertyWidgets/TrivialIntPropertyWidget.h
+				app/Gui/PropertyWidgets/TrivialIntPropertyWidget.cpp
+				app/Gui/PropertyWidgets/TrivialStringPropertyWidget.h
+				app/Gui/PropertyWidgets/TrivialStringPropertyWidget.cpp
+				app/Gui/PropertyWidgets/TrivialBoolPropertyWidget.h
+				app/Gui/PropertyWidgets/TrivialBoolPropertyWidget.cpp
+				app/Gui/PropertyWidgets/TrivialFloatPropertyWidget.h
+				app/Gui/PropertyWidgets/TrivialFloatPropertyWidget.cpp
+				app/Gui/PropertyWidgets/TrivialDoublePropertyWidget.h
+				app/Gui/PropertyWidgets/TrivialDoublePropertyWidget.cpp
+				app/Gui/PropertyWidgets/TrivialQDateTimePropertyWidget.h
+				app/Gui/PropertyWidgets/TrivialQDateTimePropertyWidget.cpp
+				app/Gui/PropertyWidgets/TrivialQTimePropertyWidget.h
+				app/Gui/PropertyWidgets/TrivialQTimePropertyWidget.cpp
+				app/Gui/PropertyWidgets/TrivialQDatePropertyWidget.h
+				app/Gui/PropertyWidgets/TrivialQDatePropertyWidget.cpp
+				
 				
 				
         main.cpp

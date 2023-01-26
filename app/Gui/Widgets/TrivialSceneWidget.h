@@ -55,6 +55,8 @@ public slots:
     void aboutTiHideOptionsMenu();
     void recreateOptionsMenu();
 
+    void onOptionEdit();
+
 private:
     NodeBase* object;
     TrivialSceneWidget* scene_widget;

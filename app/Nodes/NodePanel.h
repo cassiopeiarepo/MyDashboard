@@ -3,7 +3,7 @@
 
 #include "app/Nodes/NodeBase.h"
 
-#include "app/Gui/Views/TrivialMainWindow.h"
+#include "app/Gui/Windows/TrivialMainWindow.h"
 
 class NodePanel : public NodeBase {
 	Q_OBJECT

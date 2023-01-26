@@ -1,5 +1,6 @@
 #include "app/Gui/Widgets/TrivialSceneWidget.h"
 #include "app/Gui/Views/TrivialSceneView.h"
+#include "app/Gui/Windows/TrivialQObjectPropertyWindow.h"
 
 TrivialSceneItemWidget::TrivialSceneItemWidget(TrivialSceneWidget* _sene_widget, NodeBase* obj) : QWidget(NULL) , object(obj),
     scene_widget(_sene_widget), optionsMenu(NULL)
@@ -69,6 +70,9 @@ void TrivialSceneItemWidget::createOptionsMenu() {
 
     optionsMenu = new QMenu(this);
     QAction* action = optionsMenu->addAction("Edit");
+
+    QObject::connect(action, &QAction::triggered, this, &TrivialSceneItemWidget::onOptionEdit);
+
     //action->setCheckable(true);
     //action->setChecked(scene_widget->getShowHeaders());
     //QObject::connect(action, &QAction::toggled, this, &TrivialSceneComplexView::optionsShowHeadersTriggered);
@@ -105,6 +109,11 @@ void TrivialSceneItemWidget::aboutTiHideOptionsMenu() {
 
 void TrivialSceneItemWidget::recreateOptionsMenu() {
     createOptionsMenu();
+}
+
+void TrivialSceneItemWidget::onOptionEdit() {
+    TrivialQObjectPropertyWindow* prop_window = new TrivialQObjectPropertyWindow(this, object);
+    prop_window->show();
 }
 
 TrivialSceneWidget::TrivialSceneWidget(QWidget* parent, int _clientWidth) : QWidget(parent), selected(NULL), clientWidth(_clientWidth), expand_widget(NULL),
