@@ -45,9 +45,11 @@ public:
 
     void update();
 
-    void resizeEvent(QResizeEvent* event) override;
+    void updateSize(QSize client_widget_size);
 
     void setShowHeaders(bool show_headers);
+
+    TrivialSceneWidget* getSceneWidget() { return scene_widget; }
 
 public slots:
     void onObjectNamePressed();
@@ -59,6 +61,7 @@ public slots:
 
 private:
     NodeBase* object;
+    bool show_headers;
     TrivialSceneWidget* scene_widget;
 
     QGridLayout *gridLayout;
@@ -69,7 +72,6 @@ private:
     QTextEdit *textEdit;
 
     void createWidget();
-    void updateSize();
 
     QMenu* optionsMenu;
     void createOptionsMenu();

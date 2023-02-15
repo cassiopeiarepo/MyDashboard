@@ -12,6 +12,9 @@ public:
 
 	virtual QString getClassName() { return "text"; }
 
+    void setText(const QString& txt) { text = txt;}
+    const QString getText() { return text;}
+
 private:
 	QString text;
 };

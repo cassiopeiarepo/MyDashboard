@@ -12,8 +12,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
-find_package(QT NAMES Qt6 COMPONENTS Widgets Network Qml REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Network Qml REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Widgets Network Multimedia MultimediaWidgets Qml REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Network Multimedia MultimediaWidgets Qml REQUIRED)
 
 set(PROJECT_SOURCES				
 				coreqt/Common/Tml.h
@@ -144,6 +144,8 @@ set(PROJECT_SOURCES
 				
 				app/Gui/Windows/TrivialMainWindow.h
 				app/Gui/Windows/TrivialMainWindow.cpp
+				app/Gui/Windows/TrivialMiniWindow.h
+				app/Gui/Windows/TrivialMiniWindow.cpp
 				app/Gui/Windows/TrivialQObjectPropertyWindow.h
 				app/Gui/Windows/TrivialQObjectPropertyWindow.cpp
 				
@@ -167,6 +169,23 @@ set(PROJECT_SOURCES
 				app/Gui/PropertyWidgets/TrivialQTimePropertyWidget.cpp
 				app/Gui/PropertyWidgets/TrivialQDatePropertyWidget.h
 				app/Gui/PropertyWidgets/TrivialQDatePropertyWidget.cpp
+				
+				app/Gui/SceneWidgets/ITrivialSceneWidget.h
+				app/Gui/SceneWidgets/TrivialSceneNodeTextWidget.h
+				app/Gui/SceneWidgets/TrivialSceneNodeTextWidget.cpp
+				app/Gui/SceneWidgets/TrivialSceneNodeHeading1Widget.h
+				app/Gui/SceneWidgets/TrivialSceneNodeHeading1Widget.cpp
+				app/Gui/SceneWidgets/TrivialSceneNodeHeading2Widget.h
+				app/Gui/SceneWidgets/TrivialSceneNodeHeading2Widget.cpp
+				app/Gui/SceneWidgets/TrivialSceneNodeHeading3Widget.h
+				app/Gui/SceneWidgets/TrivialSceneNodeHeading3Widget.cpp
+				app/Gui/SceneWidgets/TrivialSceneNodeLinkWidget.h
+				app/Gui/SceneWidgets/TrivialSceneNodeLinkWidget.cpp
+				
+				app/Gui/SceneWidgets/TrivialSceneNodeImageWidget.h
+				app/Gui/SceneWidgets/TrivialSceneNodeImageWidget.cpp
+				app/Gui/SceneWidgets/TrivialSceneNodeVideoWidget.h
+				app/Gui/SceneWidgets/TrivialSceneNodeVideoWidget.cpp
 				
 				
 				
@@ -252,7 +271,7 @@ endif()
 
 #link_directories(D:/Projekty/Qt/qmqtt-master-build/Debug)
 
-target_link_libraries(MyDashboard PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Qml)
+target_link_libraries(MyDashboard PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Multimedia Qt${QT_VERSION_MAJOR}::MultimediaWidgets Qt${QT_VERSION_MAJOR}::Qml)
 
 set_target_properties(MyDashboard PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

@@ -22,5 +22,6 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::onTextChanged() {
-    markdownTextEdit->setPlainText(inputText->toMarkdown());
+    //markdownTextEdit->setPlainText(inputText->toMarkdown());
+    markdownTextEdit->setMarkdown(inputText->toPlainText());
 }

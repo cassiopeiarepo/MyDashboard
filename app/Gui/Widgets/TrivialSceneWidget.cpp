@@ -1,9 +1,13 @@
 #include "app/Gui/Widgets/TrivialSceneWidget.h"
 #include "app/Gui/Views/TrivialSceneView.h"
 #include "app/Gui/Windows/TrivialQObjectPropertyWindow.h"
+#include "app/Gui/SceneWidgets/ITrivialSceneWidget.h"
+
+
+#include "app/Utils/TypeDef.h"
 
 TrivialSceneItemWidget::TrivialSceneItemWidget(TrivialSceneWidget* _sene_widget, NodeBase* obj) : QWidget(NULL) , object(obj),
-    scene_widget(_sene_widget), optionsMenu(NULL)
+    scene_widget(_sene_widget), optionsMenu(NULL), show_headers(true)
 {
     createWidget();
 }
@@ -14,11 +18,6 @@ TrivialSceneItemWidget::~TrivialSceneItemWidget() {
 
 void TrivialSceneItemWidget::update() {
 
-}
-
-void TrivialSceneItemWidget::resizeEvent(QResizeEvent* event) {
-    updateSize();
-    QWidget::resizeEvent(event);
 }
 
 void TrivialSceneItemWidget::createWidget() {
@@ -44,19 +43,31 @@ void TrivialSceneItemWidget::createWidget() {
 
     verticalLayout_3->addLayout(horizontalLayout_2);
 
-    textEdit = new QTextEdit(this);
-    textEdit->setObjectName("textEdit");
-    textEdit->setFrameShape(QFrame::NoFrame);
-    textEdit->setFrameShadow(QFrame::Sunken);
+    QString type_name = object->metaObject()->metaType().name();
 
-    verticalLayout_3->addWidget(textEdit);
+    QWidget* central_widget = TypeSystem::get()->createWidgetForSceneView(type_name);
 
+    if (central_widget)
+    {
+        central_widget->setParent(this);
+        verticalLayout_3->addWidget(central_widget);
+
+        ITrivialSceneWidget* i_scene_widget = dynamic_cast<ITrivialSceneWidget*>(central_widget);
+        if (i_scene_widget) {
+            i_scene_widget->setTrivialSceneItemWidget(this);
+            i_scene_widget->setObject(object);
+            i_scene_widget->init();
+        }
+
+    }
 
     gridLayout->addLayout(verticalLayout_3, 0, 0, 1, 1);
 
-    updateSize();
+    QString label_text = object->objectName();
 
-    label_2->setText(object->objectName() + " : NodeText" );
+    label_text += " : " + QString(object->metaObject()->metaType().name());
+
+    label_2->setText(label_text);
 
     QObject::connect(label_2, &ObjectNameLabel::onMousePress, this, &TrivialSceneItemWidget::onObjectNamePressed);
 
@@ -89,12 +100,34 @@ void TrivialSceneItemWidget::createOptionsMenu() {
 }
 
 void TrivialSceneItemWidget::setShowHeaders(bool show_headers) {
-    label_2->setVisible(show_headers);
-    toolButton_3->setVisible(show_headers);
+    if (this->show_headers != show_headers ) {
+        label_2->setVisible(show_headers);
+        toolButton_3->setVisible(show_headers);
+        QSize _size = size();
+
+        if (show_headers) {
+            _size.setHeight(_size.height() + 20);
+        } else {
+            _size.setHeight(_size.height() - 20);
+        }
+        setFixedSize(_size);
+        this->show_headers = show_headers;
+    }
 }
 
-void TrivialSceneItemWidget::updateSize() {
+void TrivialSceneItemWidget::updateSize(QSize client_widget_size) {
+    QSize size = QSize(client_widget_size.width(), client_widget_size.height());
 
+    if (show_headers)
+        size.setHeight(size.height() + 20);
+
+    /*
+    if (size.height() < 44) {
+        size.setHeight(44);
+    }*/
+
+    qDebug() << "TrivialSceneItemWidget::updateSize " << size;
+    setFixedSize(size);
 }
 
 void TrivialSceneItemWidget::onObjectNamePressed() {
@@ -139,6 +172,8 @@ void TrivialSceneWidget::createWidget() {
     verticalLayout = new QVBoxLayout();
     verticalLayout->setObjectName("verticalLayout");
     verticalLayout->setSizeConstraint(QLayout::SetFixedSize);
+    verticalLayout->setSpacing(1);
+
 
     gridLayout->addLayout(verticalLayout, 0, 0, 1, 1);
 
@@ -172,7 +207,9 @@ void TrivialSceneWidget::rebuildChilds() {
         TrivialSceneItemWidget* child = new TrivialSceneItemWidget(this, child_node);
         child->setShowHeaders(show_headers);
         items.append(child);
-        child->setFixedSize(300, 100);
+        //child->setFixedSize(300, 400);
+        //QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        //child->setSizePolicy(sizePolicy);
         verticalLayout->addWidget(child);
     }
 

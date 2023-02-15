@@ -1,6 +1,7 @@
 #include "app/Gui/Widgets/TrivialQObjectPropertyWidget.h"
 #include "qmetaobject.h"
 #include <QHeaderView>
+#include <QScrollbar>
 
 #include "app/Gui/PropertyWidgets/TrivialIntPropertyWidget.h"
 #include "app/Gui/PropertyWidgets/TrivialStringPropertyWidget.h"
@@ -215,7 +216,6 @@ QWidget *TrivialPropertyDelegate::createEditor(QWidget *parent,
             result = new TrivialStringPropertyWidget(parent);
             break;
         }
-
     case QMetaType::Int: {
             result = new TrivialIntPropertyWidget(parent);
             break;
@@ -297,6 +297,7 @@ TrivialQObjectPropertyWidget::TrivialQObjectPropertyWidget(QWidget *parent)
 
     verticalHeader()->hide();
     horizontalHeader()->hide();
+
 }
 
 TrivialQObjectPropertyWidget::~TrivialQObjectPropertyWidget() {
@@ -319,7 +320,7 @@ void TrivialQObjectPropertyWidget::setTimerUpdate(bool enabled) {
 
 void TrivialQObjectPropertyWidget::resizeEvent(QResizeEvent *event) {
     setColumnWidth(0, 120);
-    setColumnWidth(1, width() - 122);
+    setColumnWidth(1, width() - 137);
 
 }
 

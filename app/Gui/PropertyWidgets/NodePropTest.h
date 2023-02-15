@@ -18,6 +18,38 @@ public:
     Q_PROPERTY(QTime TimeProp READ getTime WRITE setTime)
     Q_PROPERTY(QDate DateProp READ getDate WRITE setDate)
 
+
+    Q_PROPERTY(int IntProp2 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp3 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp4 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp5 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp6 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp7 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp8 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp9 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp10 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp11 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp12 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp13 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp14 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp15 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp16 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp17 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp18 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp19 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp20 READ getInt WRITE setInt)
+
+    Q_PROPERTY(int IntProp21 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp22 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp23 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp24 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp25 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp26 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp27 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp28 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp29 READ getInt WRITE setInt)
+    Q_PROPERTY(int IntProp30 READ getInt WRITE setInt)
+
     virtual void LoadTml(TmlNode* node);
 
     virtual QString getClassName() { return "propTest"; }

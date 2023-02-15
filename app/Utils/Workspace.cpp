@@ -25,6 +25,15 @@
 #include "app/Nodes/UI/NodeQPushButton.h"
 #include "app/Nodes/UI/NodeQTextEdit.h"
 
+#include "app/Nodes/Basic/NodeText.h"
+#include "app/Nodes/Basic/NodeLink.h"
+#include "app/Nodes/Basic/NodeHeading1.h"
+#include "app/Nodes/Basic/NodeHeading2.h"
+#include "app/Nodes/Basic/NodeHeading3.h"
+
+#include "app/Nodes/Media/NodeImage.h"
+#include "app/Nodes/Media/NodeVideo.h"
+
 #include "app/Utils/Script.h"
 #include "app/Utils/TypeDef.h"
 
@@ -47,6 +56,60 @@ void Workspace::init(QString _dir) {
 	dummy1->setObjectName("Calendar");
 	dummy1->setParent(dummy_root);
 	
+    NodeText* text1 = new NodeText();
+    text1->setObjectName("Text1");
+    text1->setParent(dummy1);
+
+    NodeLink* link1 = new NodeLink();
+    link1->setObjectName("Link11");
+    link1->setParent(dummy1);
+    link1->setNode(text1);
+
+    NodeHeading1* heading1 = new NodeHeading1();
+    heading1->setObjectName("heading1");
+    heading1->setParent(dummy1);
+    heading1->setText("Treść heading1");
+
+    NodeHeading2* heading2 = new NodeHeading2();
+    heading2->setObjectName("heading2");
+    heading2->setParent(dummy1);
+    heading2->setText("Treść heading2");
+
+    NodeHeading3* heading3 = new NodeHeading3();
+    heading3->setObjectName("heading3");
+    heading3->setParent(dummy1);
+    heading3->setText("Treść heading3");
+
+    NodeImage* image1 = new NodeImage();
+    image1->setObjectName("image1");
+    image1->setParent(dummy1);
+    image1->setPath("D:/Tapety/pexels-errin-casano-2356045.jpg");
+
+    NodeVideo* video1 = new NodeVideo();
+    video1->setObjectName("video1");
+    video1->setParent(dummy1);
+    //video1->setPath("https://youtu.be/lWqJTKdznaM");
+    video1->setPath("C:/Users/mhers/Downloads/sample_960x400_ocean_with_audio.mpeg");
+
+/*
+    NodeText* text2 = new NodeText();
+    text2->setObjectName("Text2");
+    text2->setParent(dummy1);
+
+    NodeText* text3 = new NodeText();
+    text3->setObjectName("Text3");
+    text3->setParent(dummy1);
+
+    NodeText* text4 = new NodeText();
+    text4->setObjectName("Text4");
+    text4->setParent(dummy1);
+
+    NodeText* text5 = new NodeText();
+    text5->setObjectName("Text5");
+    text5->setParent(dummy1);
+*/
+
+    /*
     NodePropTest* event1 = new NodePropTest();
     event1->setObjectName("prop_test");
 	event1->setParent(dummy1);
@@ -58,6 +121,7 @@ void Workspace::init(QString _dir) {
 	NodeEvent* event3 = new NodeEvent();
 	event3->setObjectName("event3");
 	event3->setParent(dummy1);
+    */
 
     /*
 	QList<NodeEvent*> events = Calendar::get()->getEvents(2022, 06, 16);

@@ -34,6 +34,8 @@ public:
 
 	QList<TypeDef*> getDerivedTypes(TypeDef* parent_type) { }
 	
+    QWidget* createWidgetForSceneView(const QString& mata_type_name);
+
 
 private:
 	QList<TypeDef*> types;

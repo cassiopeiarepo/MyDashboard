@@ -10,6 +10,10 @@ class NodePerson : public NodeBase {
 	Q_OBJECT
 public:
 
+    Q_PROPERTY(QString Nick READ getNick WRITE setNick)
+    Q_PROPERTY(QString FirstName READ getFirstName WRITE setFirstName)
+    Q_PROPERTY(QString SecondName READ getSecondName WRITE setSecondName)
+
 	const QString& getNick() { return nick;  }
 	void setNick(const QString& _nick) { nick = _nick; }
 

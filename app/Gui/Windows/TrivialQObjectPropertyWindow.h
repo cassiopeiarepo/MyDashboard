@@ -3,27 +3,20 @@
 
 #include <QDialog>
 #include "app/Gui/Widgets/TrivialQObjectPropertyWidget.h"
+#include "app/Gui/Windows/TrivialMiniWindow.h"
 #include "app/Utils/Gui.h"
 
-class TrivialQObjectPropertyWindow : public QDialog {
+class TrivialQObjectPropertyWindow : public TrivialMiniWindow {
 
     Q_OBJECT
 public:
-    TrivialQObjectPropertyWindow(QWidget* parent, QObject* obj) : QDialog(parent) {
-        setWindowTitle("Property");
-        setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-        setAttribute(Qt::WA_DeleteOnClose);
+    TrivialQObjectPropertyWindow(QWidget* parent, QObject* obj) : TrivialMiniWindow(parent) {
 
-        int w = Gui::get()->getWidth();
-        int h = Gui::get()->getHeight();
-        QPoint win_pos = Gui::get()->getGloabalPos();
-        QRect geom(win_pos.x(), win_pos.y(), w, h);
-        this->setGeometry(geom);
-
+        setCaption("Property");
         prop_widget = new TrivialQObjectPropertyWidget(this);
         prop_widget->SetObject(obj);
 
-        Gui::get()->addChildWidgetAndFillInGrid(this, prop_widget);
+        Gui::get()->addChildWidgetAndFillInGrid(getClient(), prop_widget);
     }
 
     ~TrivialQObjectPropertyWindow() {

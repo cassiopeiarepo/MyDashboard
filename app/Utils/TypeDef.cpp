@@ -9,6 +9,14 @@
 #include "app/Nodes/Pim/NodeTask.h"
 
 
+#include "app/Gui/SceneWidgets/TrivialSceneNodeTextWidget.h"
+#include "app/Gui/SceneWidgets/TrivialSceneNodeLinkWidget.h"
+#include "app/Gui/SceneWidgets/TrivialSceneNodeHeading1Widget.h"
+#include "app/Gui/SceneWidgets/TrivialSceneNodeHeading2Widget.h"
+#include "app/Gui/SceneWidgets/TrivialSceneNodeHeading3Widget.h"
+#include "app/Gui/SceneWidgets/TrivialSceneNodeImageWidget.h"
+#include "app/Gui/SceneWidgets/TrivialSceneNodeVideoWidget.h"
+
 void TypeSystem::init() {
 
 	TypeDef* type_def = registerType(NodeDummy::staticMetaObject);
@@ -71,5 +79,32 @@ TypeDef* TypeSystem::registerType(QMetaObject metaObject) {
 
 	return NULL;
 }
+
+QWidget* TypeSystem::createWidgetForSceneView(const QString& mata_type_name) {
+    QWidget* widget = NULL;
+
+    qDebug() << "TypeSystem::createWidgetForSceneView create widget for " << mata_type_name;
+
+    if (mata_type_name == "NodeText") {
+        widget = new TrivialSceneNodeTextWidget();
+    } else if (mata_type_name == "NodeLink") {
+        widget = new TrivialSceneNodeLinkWidget();
+    } else if (mata_type_name == "NodeHeading1") {
+        widget = new TrivialSceneNodeHeading1Widget();
+    } else if (mata_type_name == "NodeHeading2") {
+        widget = new TrivialSceneNodeHeading2Widget();
+    } else if (mata_type_name == "NodeHeading3") {
+        widget = new TrivialSceneNodeHeading3Widget();
+    } else if (mata_type_name == "NodeImage") {
+        widget = new TrivialSceneNodeImageWidget();
+    } else if (mata_type_name == "NodeVideo") {
+        widget = new TrivialSceneNodeVideoWidget();
+    }
+
+
+
+    return widget;
+}
+
 
 
