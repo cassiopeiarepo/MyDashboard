@@ -16,6 +16,7 @@
 #include "app/Gui/SceneWidgets/TrivialSceneNodeHeading3Widget.h"
 #include "app/Gui/SceneWidgets/TrivialSceneNodeImageWidget.h"
 #include "app/Gui/SceneWidgets/TrivialSceneNodeVideoWidget.h"
+#include "app/Gui/SceneWidgets/TrivialSceneNodeAudioWidget.h"
 
 void TypeSystem::init() {
 
@@ -99,9 +100,9 @@ QWidget* TypeSystem::createWidgetForSceneView(const QString& mata_type_name) {
         widget = new TrivialSceneNodeImageWidget();
     } else if (mata_type_name == "NodeVideo") {
         widget = new TrivialSceneNodeVideoWidget();
+    } else if (mata_type_name == "NodeAudio") {
+        widget = new TrivialSceneNodeAudioWidget();
     }
-
-
 
     return widget;
 }

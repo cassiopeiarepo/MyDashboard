@@ -19,6 +19,8 @@ public:
         setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+        setFrameStyle(0);
+        setFrameShape(QFrame::NoFrame);
         //setStyleSheet("QTextEdit { margin: 0px; }");
 
         setReadOnly(true);

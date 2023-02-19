@@ -89,6 +89,8 @@ set(PROJECT_SOURCES
 				app/Nodes/Media/NodeImage.cpp
 				app/Nodes/Media/NodeVideo.h
 				app/Nodes/Media/NodeVideo.cpp
+				app/Nodes/Media/NodeAudio.h
+				app/Nodes/Media/NodeAudio.cpp
 				
 				app/Nodes/TmlDef/NodeTmlDef.h
 				app/Nodes/TmlDef/NodeTmlDef.cpp
@@ -111,6 +113,10 @@ set(PROJECT_SOURCES
 				app/Gui/Widgets/TrivialSceneTreeWidget.cpp
 				app/Gui/Widgets/TrivialQObjectPropertyWidget.h
 				app/Gui/Widgets/TrivialQObjectPropertyWidget.cpp
+				app/Gui/Widgets/TrivialAudioPlayerWidget.h
+				app/Gui/Widgets/TrivialAudioPlayerWidget.cpp
+				app/Gui/Widgets/TrivialVideoPlayerWidget.h
+				app/Gui/Widgets/TrivialVideoPlayerWidget.cpp
 				
                 app/Gui/Views/TrivialTextEditor.h
                 app/Gui/Views/TrivialTextEditor.cpp
@@ -186,6 +192,8 @@ set(PROJECT_SOURCES
 				app/Gui/SceneWidgets/TrivialSceneNodeImageWidget.cpp
 				app/Gui/SceneWidgets/TrivialSceneNodeVideoWidget.h
 				app/Gui/SceneWidgets/TrivialSceneNodeVideoWidget.cpp
+				app/Gui/SceneWidgets/TrivialSceneNodeAudioWidget.h
+				app/Gui/SceneWidgets/TrivialSceneNodeAudioWidget.cpp
 				
 				
 				

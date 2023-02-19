@@ -1,13 +1,10 @@
 #include "Workspace.h"
-#include "app/Utils/Log.h"
 #include "app/Utils/Calendar.h"
 
 //#include <QScriptEngine>
 
-
 #include "coreqt/Utils/QStringUtils.h"
 #include <QDebug>
-
 
 #include "app/Nodes/NodeBase.h"
 #include "app/Nodes/NodeInclude.h"
@@ -33,8 +30,8 @@
 
 #include "app/Nodes/Media/NodeImage.h"
 #include "app/Nodes/Media/NodeVideo.h"
+#include "app/Nodes/Media/NodeAudio.h"
 
-#include "app/Utils/Script.h"
 #include "app/Utils/TypeDef.h"
 
 #include "coreqt/Common/TmlDef.h"
@@ -85,11 +82,23 @@ void Workspace::init(QString _dir) {
     image1->setParent(dummy1);
     image1->setPath("D:/Tapety/pexels-errin-casano-2356045.jpg");
 
+    /*
+    NodeAudio* audio1 = new NodeAudio();
+    audio1->setObjectName("audio1");
+    audio1->setParent(dummy1);
+    audio1->setPath("C:/Users/mhers/Downloads/BabyElephantWalk60.wav");
+*/
+
+
     NodeVideo* video1 = new NodeVideo();
     video1->setObjectName("video1");
     video1->setParent(dummy1);
-    //video1->setPath("https://youtu.be/lWqJTKdznaM");
-    video1->setPath("C:/Users/mhers/Downloads/sample_960x400_ocean_with_audio.mpeg");
+    //video1->setPath("https://youtu.be/embed/lWqJTKdznaM");
+    //video1->setPath("C:/Users/mhers/Downloads/sample_960x400_ocean_with_audio.mpeg");
+    //video1->setPath("C:/Users/mhers/Downloads/big_buck_bunny_480p_stereo.ogg");
+    video1->setPath("C:/Users/mhers/Downloads/sample-mp4-file.mp4");
+    //video1->setPath("C:/Users/mhers/Downloads/sample-mov-file.mov");
+
 
 /*
     NodeText* text2 = new NodeText();

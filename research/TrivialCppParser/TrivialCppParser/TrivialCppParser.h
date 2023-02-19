@@ -11,6 +11,8 @@
 
   */
 
+/*
+
 class TrivialCppParser;
 
 class TrivialCppLex {
@@ -74,5 +76,7 @@ signals:
 
     friend class TrivialCppLex;
 };
+
+*/
 
 #endif // TRIVIALCPPPARSER_H

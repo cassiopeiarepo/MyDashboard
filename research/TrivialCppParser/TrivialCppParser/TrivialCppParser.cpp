@@ -1,3 +1,5 @@
+/*
+
 #include "TrivialCppParser.h"
 
 
@@ -98,8 +100,9 @@ TrivialCppLex::Sym TrivialCppLex::next() {
 
 
 
-TrivialCppParser::TrivialCppParser(QObject *parent)
+TrivialSimpleCppParser::TrivialSimpleCppParser(QObject *parent)
     : QObject{parent}
 {
 
 }
+*/

@@ -1,7 +1,11 @@
 <RCC>
-  <qresource prefix="/icons">
-    <file>ui/icons/add_FILL0_wght400_GRAD0_opsz48.png</file>
-    <file>ui/icons/home_FILL0_wght400_GRAD0_opsz48.png</file>
-    <file>ui/icons/menu_FILL0_wght400_GRAD0_opsz48.png</file>
-  </qresource>
+    <qresource prefix="/icons">
+        <file>ui/icons/add_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/home_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/menu_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/pause_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/play_arrow_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/close_fullscreen_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/fullscreen_FILL0_wght400_GRAD0_opsz48.png</file>
+    </qresource>
 </RCC>

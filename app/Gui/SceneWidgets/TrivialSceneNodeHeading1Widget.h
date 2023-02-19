@@ -17,6 +17,9 @@ public:
         setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+        setFrameStyle(0);
+        setFrameShape(QFrame::NoFrame);
+
         QObject::connect(this, &QTextEdit::textChanged, this, &TrivialSceneNodeHeading1Widget::OnTextChanged);
 
         QObject::connect(document()->documentLayout(), &QAbstractTextDocumentLayout::update, [&]() {
