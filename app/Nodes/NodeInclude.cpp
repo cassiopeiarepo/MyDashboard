@@ -14,3 +14,8 @@ void NodeInclude::LoadTml(TmlNode* node) {
 
 	Workspace::get()->pushInputFile(rel_path);
 }
+
+void NodeInclude::SaveTml(TmlNode* node) {
+    NodeBase::SaveTml(node);
+    node->setArgValue("rel_path", rel_path);
+}

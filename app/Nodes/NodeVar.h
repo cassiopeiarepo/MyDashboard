@@ -8,12 +8,12 @@ class NodeVar : public NodeBase {
 	Q_OBJECT
 public:
 
-	virtual void LoadTml(TmlNode* node);
+    void LoadTml(TmlNode* node) override;
+    void SaveTml(TmlNode* node) override;
 
 	virtual QString getClassName() { return "var"; }
 
 private:
-	QString name;
 	QString value;
 };
 

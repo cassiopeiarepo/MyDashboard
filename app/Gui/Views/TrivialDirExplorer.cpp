@@ -17,7 +17,8 @@ TrivialDirExplorer::TrivialDirExplorer() {
     msgBox.exec();
     */
 
-    model->setRootPath("d:/Workscpace");
+    //model->setRootPath("d:/Workscpace");
+    model->setRootPath(QDir::currentPath());
     setModel(model);
     hideColumn(1);
     hideColumn(2);

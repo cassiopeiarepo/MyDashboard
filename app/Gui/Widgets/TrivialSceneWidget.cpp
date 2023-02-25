@@ -13,7 +13,8 @@ TrivialSceneItemWidget::TrivialSceneItemWidget(TrivialSceneWidget* _sene_widget,
 }
 
 TrivialSceneItemWidget::~TrivialSceneItemWidget() {
-
+    if (optionsMenu)
+        delete optionsMenu;
 }
 
 void TrivialSceneItemWidget::update() {
@@ -37,6 +38,7 @@ void TrivialSceneItemWidget::createWidget() {
 
     label_2 = new ObjectNameLabel(this);
     label_2->setObjectName("label_2");
+    label_2->setStyleSheet("padding-left: 4px;");
 
     horizontalLayout_2->addWidget(label_2);
 
@@ -44,6 +46,15 @@ void TrivialSceneItemWidget::createWidget() {
     verticalLayout_3->addLayout(horizontalLayout_2);
 
     QString type_name = object->metaObject()->metaType().name();
+
+    const TypeDef* type_def = TypeSystem::get()->getType(type_name);
+    if (type_def) {
+        QIcon _icon;
+        qDebug() << "test1 " << type_def->getIconRes();
+        _icon.addFile(type_def->getIconRes()/*":/icons/ui/icons/play_arrow_FILL0_wght400_GRAD0_opsz48.png"*/, QSize(), QIcon::Normal, QIcon::Off);
+        toolButton_3->setIcon(_icon);
+        //toolButton_3->setIconSize(QSize(24, 24));
+    }
 
     QWidget* central_widget = TypeSystem::get()->createWidgetForSceneView(type_name);
 
@@ -80,9 +91,21 @@ void TrivialSceneItemWidget::createOptionsMenu() {
         delete optionsMenu;
 
     optionsMenu = new QMenu(this);
-    QAction* action = optionsMenu->addAction("Edit");
 
-    QObject::connect(action, &QAction::triggered, this, &TrivialSceneItemWidget::onOptionEdit);
+    QAction* action = optionsMenu->addAction("New Node");
+    QObject::connect(action, &QAction::triggered, this, &TrivialSceneItemWidget::onOptionNewNode);
+
+    action = optionsMenu->addAction("Cut");
+    QObject::connect(action, &QAction::triggered, this, &TrivialSceneItemWidget::onOptionCut);
+
+    action = optionsMenu->addAction("Copy");
+    QObject::connect(action, &QAction::triggered, this, &TrivialSceneItemWidget::onOptionCopy);
+
+    action = optionsMenu->addAction("Paste");
+    QObject::connect(action, &QAction::triggered, this, &TrivialSceneItemWidget::onOptionPaste);
+
+    action = optionsMenu->addAction("Properties");
+    QObject::connect(action, &QAction::triggered, this, &TrivialSceneItemWidget::onOptionProperties);
 
     //action->setCheckable(true);
     //action->setChecked(scene_widget->getShowHeaders());
@@ -93,6 +116,7 @@ void TrivialSceneItemWidget::createOptionsMenu() {
     QSize size = optionsMenu->sizeHint();
     //size.setWidth(100);
     optionsMenu->setFixedSize(100, size.height());
+
 
     toolButton_3->setMenu(optionsMenu);
     toolButton_3->setPopupMode(QToolButton::InstantPopup);
@@ -144,13 +168,29 @@ void TrivialSceneItemWidget::recreateOptionsMenu() {
     createOptionsMenu();
 }
 
-void TrivialSceneItemWidget::onOptionEdit() {
+void TrivialSceneItemWidget::onOptionNewNode() {
+
+}
+
+void TrivialSceneItemWidget::onOptionCut() {
+
+}
+
+void TrivialSceneItemWidget::onOptionCopy() {
+
+}
+
+void TrivialSceneItemWidget::onOptionPaste() {
+
+}
+
+void TrivialSceneItemWidget::onOptionProperties() {
     TrivialQObjectPropertyWindow* prop_window = new TrivialQObjectPropertyWindow(this, object);
     prop_window->show();
 }
 
 TrivialSceneWidget::TrivialSceneWidget(QWidget* parent, int _clientWidth) : QWidget(parent), selected(NULL), clientWidth(_clientWidth), expand_widget(NULL),
-    show_headers(true)
+    show_headers(true), addMenu(NULL)
 {
     createWidget();
 }
@@ -181,11 +221,18 @@ void TrivialSceneWidget::createWidget() {
 
     gridLayout_2->addWidget(scrollArea, 0, 0, 1, 1);
 
+    addToolButton = new QToolButton(this);
+
+    QIcon _icon;
+    _icon.addFile(":/icons/ui/icons/add_FILL0_wght400_GRAD0_opsz48.png", QSize(), QIcon::Normal, QIcon::Off);
+    addToolButton->setIcon(_icon);
+
     expand_widget = new QWidget(this);
     QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
     expand_widget->setSizePolicy(sizePolicy);
 
     rebuildChilds();
+    createAddMenu();
 }
 
 void TrivialSceneWidget::rebuildChilds() {
@@ -198,7 +245,10 @@ void TrivialSceneWidget::rebuildChilds() {
 
     items.clear();
 
+
     verticalLayout->removeWidget(expand_widget);
+    verticalLayout->removeWidget(addToolButton);
+
 
     QObjectList childs_obj = selected->children();
 
@@ -207,52 +257,41 @@ void TrivialSceneWidget::rebuildChilds() {
         TrivialSceneItemWidget* child = new TrivialSceneItemWidget(this, child_node);
         child->setShowHeaders(show_headers);
         items.append(child);
-        //child->setFixedSize(300, 400);
-        //QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
-        //child->setSizePolicy(sizePolicy);
         verticalLayout->addWidget(child);
     }
 
+
+    verticalLayout->addWidget(addToolButton);
     verticalLayout->addWidget(expand_widget);
+}
 
-    /*
-    for (int i = 0; i < items.size(); i++) {
-        delete items[i];
-    }
+void TrivialSceneWidget::createAddMenu() {
+    if (addMenu)
+        delete addMenu;
 
-    items.clear();
+    addMenu = new QMenu(this);
 
-    QObjectList childs_obj = selected->children();
+    QAction* action = addMenu->addAction("New Node");
+    //QObject::connect(action, &QAction::triggered, this, &TrivialSceneItemWidget::onOptionNewNode);
 
-    int margin = 20;
-    int max_width = 300;
+    action = addMenu->addAction("Paste");
+    //QObject::connect(action, &QAction::triggered, this, &TrivialSceneItemWidget::onOptionPaste);
 
-    int separ = 20;
-    int pos_y = 0;
+    QSize size = addMenu->sizeHint();
+    addMenu->setFixedSize(100, size.height());
 
-    int pos_x = margin;
-    int width = this->size().width() - 2 * margin;
 
-    if (width > max_width) {
-        width = max_width;
-        pos_x = (this->size().width() - max_width) / 2;
-    }
+    addToolButton->setMenu(addMenu);
+    addToolButton->setPopupMode(QToolButton::InstantPopup);
+    connect(addMenu, &QMenu::aboutToHide, this, &TrivialSceneWidget::aboutTiHideAddMenu);
+}
 
-    for (int i = 0; i < childs_obj.size(); i++) {
-        NodeBase* child_node = qobject_cast<NodeBase*>(childs_obj[i]);
-        TrivialSceneItemWidget* child = new TrivialSceneItemWidget(this, child_node);
-        items.append(child);
-        child->move(pos_x, pos_y);
-        child->resize(width, 200);
-        QSize size_hint = child->sizeHint();
-        child->resize(width, size_hint.height());
-        pos_y += child->size().height() + separ;
-    }
+void TrivialSceneWidget::aboutTiHideAddMenu() {
+    QTimer::singleShot(1, this, &TrivialSceneWidget::recreateAddMenu);
+}
 
-    this->setVisible(false);
-    this->setVisible(true);
-    */
-
+void TrivialSceneWidget::recreateAddMenu() {
+    createAddMenu();
 }
 
 void TrivialSceneWidget::select(NodeBase* object) {

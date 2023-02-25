@@ -1,0 +1,8 @@
+#ifndef TRIVIAL_NEW_NODE_WIDGET_H
+#define TRIVIAL_NEW_NODE_WIDGET_H
+
+
+
+
+
+#endif

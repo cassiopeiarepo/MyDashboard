@@ -18,7 +18,12 @@ void NodePanel::LoadTml(TmlNode* node) {
 
 		}
 	}
+}
 
+void NodePanel::SaveTml(TmlNode* node) {
+    NodeBase::SaveTml(node);
+    //node->setArgValue("name", objectName());
+    //node->setArgValue("tags", tags.toString());
 }
 
 bool NodePanel::StrToPanelPlace(const QString& str, TrivialMainWindow::PanelPlace* panel_place) {

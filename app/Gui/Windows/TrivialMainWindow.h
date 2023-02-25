@@ -22,6 +22,8 @@ class TrivialLogView;
 class TrivialSceneComplexView;
 class TrivialSceneTreeView;
 class TrivialMainView;
+class TrivialObjectTreePropView;
+
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -254,6 +256,7 @@ private:
     QTabWidget* bottom_right;
     CentralWidget* panel_central;
 
+    TrivialObjectTreePropView* obj_tree_prop;
     TrivialDirExplorer* dir_explorer;
     TrivialDocumentsView* doc_view;
     TrivialScriptView* script_view;

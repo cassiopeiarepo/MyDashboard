@@ -1,6 +1,7 @@
 #include "app/Gui/Widgets/TrivialVideoPlayerWidget.h"
 #include "app/Utils/Gui.h"
 #include <QTime>
+#include <QVideoFrame>
 
 TrivialVideoPlayerWidget::TrivialVideoPlayerWidget(QWidget* parent) : QWidget(parent), controlsHeight(30) {
     createWidget();
@@ -55,6 +56,7 @@ void TrivialVideoPlayerWidget::createWidget() {
 
     QObject::connect(mPlayer, &QMediaPlayer::errorOccurred, this, &TrivialVideoPlayerWidget::errorOccurred);
     QObject::connect(mPlayer, &QMediaPlayer::positionChanged, this, &TrivialVideoPlayerWidget::positionChanged);
+    //QObject::connect(mPlayer, &QMediaPlayer::videoFrameChanged, this, &TrivialVideoPlayerWidget::videoFrameChanged);
 
     setIcon(":/icons/ui/icons/play_arrow_FILL0_wght400_GRAD0_opsz48.png");
     setFullscreenIcon(":/icons/ui/icons/fullscreen_FILL0_wght400_GRAD0_opsz48.png");
@@ -71,6 +73,19 @@ void TrivialVideoPlayerWidget::positionChanged(qint64 position) {
     currentTime = currentTime.addMSecs(position);
     QString timeString = currentTime.toString("hh:mm:ss");
     m_MediaPositionLabel->setText(timeString);
+}
+
+void TrivialVideoPlayerWidget::videoFrameChanged() {
+
+    /*
+    QVideoFrame frame = mPlayer->videoFrame();
+    if (!frame.isValid()) {
+        return;
+    }
+    QSize size = frame.size();
+    //resolutionLabel->setText(QString("Resolution: %1x%2").arg(size.width()).arg(size.height()));
+    */
+
 }
 
 void TrivialVideoPlayerWidget::volumeSliderChange(int vol) {

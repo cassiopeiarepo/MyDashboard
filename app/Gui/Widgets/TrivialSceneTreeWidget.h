@@ -11,6 +11,8 @@
 #include <QMouseEvent>
 #include <QTextEdit>
 
+#include "app/Nodes/NodeBase.h"
+
 void list_children(QObject* parent) ;
 
 
@@ -131,8 +133,6 @@ protected:
     }
 
 
-
-
 private:
     QPoint start_child_pos;
     QPoint start_mouse_pos;
@@ -166,6 +166,8 @@ public:
 
     void setRoot(QObject* root) { rootItem = root; }
 
+    void update(QObject* parent);
+
 private:
     QObject* rootItem;
 };
@@ -188,6 +190,8 @@ public slots:
     void onActivated(const QModelIndex& index);
 
     void onNewNodeActionTriggered();
+    void onCopyActionTriggered();
+    void onPasteActionTriggered();
 
 protected:
     void mousePressEvent(QMouseEvent* event) override;
@@ -195,10 +199,17 @@ protected:
 
 private:
     TrivialSceneTreeModel* model;
-    //QMenu* m_contextMenu;
+
+    QList<QModelIndex> expandedIndexes;
 
     QPoint m_pressPos;
     bool m_longPress;
+
+    NodeBase* getSelectedNode();
+
+    void saveExpandedState(const QModelIndex &parentIndex);
+    void saveExpandedState();
+    void restoreExpandedState();
 };
 
 

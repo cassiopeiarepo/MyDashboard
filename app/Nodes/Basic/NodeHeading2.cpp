@@ -11,6 +11,16 @@ void NodeHeading2::LoadTml(TmlNode* node) {
         //}
     }
 
+    TmlNode* child = node->getChild("param_text");
+
+    if (child) {
+        text = child->getData();
+    }
 }
 
+void NodeHeading2::SaveTml(TmlNode* node) {
+    NodeBase::SaveTml(node);
+    TmlNode* child = node->createChild("param_text");
+    child->setData(text);
+}
 

@@ -18,6 +18,7 @@
 #include <QScrollBar>
 #include <QLineEdit>
 
+#include "app/gui/Views/TrivialObjectTreePropView.h"
 #include "app/Gui/Views/TrivialDirExplorer.h"
 #include "app/Gui/Views/TrivialDocumentsView.h"
 #include "app/Gui/Views/TrivialScriptView.h"
@@ -32,8 +33,9 @@
 
 
 TrivialMainWindow::TrivialMainWindow(QWidget* parent) {
-	resize(360, 747); // telefon
-	//resize(1333, 716); //tablet
+    //resize(360, 747); // telefon
+    //resize(1333, 716); //tablet
+    resize(1860, 1200);
 
     Gui::get()->setMainWindow(this);
     Gui::get()->updateSize(width(), height());
@@ -51,14 +53,15 @@ void TrivialMainWindow::createGui() {
 
 	log_view = new TrivialLogView();
 
-    /*
+
 	if (Gui::get()->isDesktop()) {
 		
+        obj_tree_prop = new TrivialObjectTreePropView(NULL);
 		dir_explorer = new TrivialDirExplorer();
 		doc_view = TrivialDocumentsView::get();
 		script_view = new TrivialScriptView();
 	}
-    */
+
 
     centralwidget = new QWidget(this);
     centralwidget->setObjectName("centralwidget");
@@ -80,12 +83,12 @@ void TrivialMainWindow::createGui() {
 
 		Gui::get()->addChildWidgetAndFillInGrid(centralwidget, main_view);
 
-		main_view->select("Log", "");
+        main_view->select("Tree", "");
 
     }
 
-    /*else if (Gui::get()->getSize() == Gui::GUI_MIDI) {
-		ui_main_menu_midi.setupUi(centralwidget);
+    else if (Gui::get()->getSize() == Gui::GUI_MIDI) {
+        //ui_main_menu_midi.setupUi(centralwidget);
     } else if (Gui::get()->getSize() == Gui::GUI_MAXI && Gui::get()->isDesktop()) {
 
         createDesktopActions();
@@ -93,10 +96,12 @@ void TrivialMainWindow::createGui() {
 
         addPanel(PanelPlace::LEFT, QString("Workspace"), dir_explorer);
         addPanel(PanelPlace::CENTER, QString("Documents"), doc_view);
+        addPanel(PanelPlace::RIGHT, QString("Object"), obj_tree_prop);
+
         addPanel(PanelPlace::BOTTOM_LEFT, QString("Script"), script_view);
         addPanel(PanelPlace::BOTTOM_RIGHT, QString("Log"), log_view);
     }
-    */
+
 }
 
 void TrivialMainWindow::updateGui() {
@@ -126,7 +131,13 @@ void TrivialMainWindow::updateGui() {
 }
 
 void TrivialMainWindow::init() {
-    scene_tree_view->setRoot(Workspace::get()->getRoot());
+    if (Gui::get()->getSize() == Gui::GUI_MINI) {
+        scene_tree_view->setRoot(Workspace::get()->getRoot());
+    }    else if (Gui::get()->getSize() == Gui::GUI_MIDI) {
+
+    } else if (Gui::get()->getSize() == Gui::GUI_MAXI && Gui::get()->isDesktop()) {
+        obj_tree_prop->setRoot(Workspace::get()->getRoot());
+    }
 }
 
 void TrivialMainWindow::deleteCentralWidgetChilds() {

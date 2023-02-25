@@ -14,6 +14,7 @@ public:
 	NodeBase() : QObject() { }
 
 	virtual void LoadTml(TmlNode* node);
+    virtual void SaveTml(TmlNode* node);
 
 	virtual QString getClassName() { return "NodeBase"; }
 

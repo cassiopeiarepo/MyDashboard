@@ -117,6 +117,11 @@ set(PROJECT_SOURCES
 				app/Gui/Widgets/TrivialAudioPlayerWidget.cpp
 				app/Gui/Widgets/TrivialVideoPlayerWidget.h
 				app/Gui/Widgets/TrivialVideoPlayerWidget.cpp
+				app/Gui/Widgets/TrivialCommonNodesWidget.h
+				app/Gui/Widgets/TrivialCommonNodesWidget.cpp
+				app/Gui/Widgets/TrivialNewNodeWidget.h
+				app/Gui/Widgets/TrivialNewNodeWidget.cpp
+				
 				
                 app/Gui/Views/TrivialTextEditor.h
                 app/Gui/Views/TrivialTextEditor.cpp
@@ -143,6 +148,8 @@ set(PROJECT_SOURCES
 				app/Gui/Views/TrivialSceneView.cpp
 				app/Gui/Views/TrivialSceneTreeView.h
 				app/Gui/Views/TrivialSceneTreeView.cpp
+				app/Gui/Views/TrivialObjectTreePropView.h
+				app/Gui/Views/TrivialObjectTreePropView.cpp
 				app/Gui/Views/TrivialMainView.h
 				app/Gui/Views/TrivialMainView.cpp
 				app/Gui/Views/TrivialSignalSlotView.h
@@ -154,6 +161,8 @@ set(PROJECT_SOURCES
 				app/Gui/Windows/TrivialMiniWindow.cpp
 				app/Gui/Windows/TrivialQObjectPropertyWindow.h
 				app/Gui/Windows/TrivialQObjectPropertyWindow.cpp
+				app/Gui/Windows/TrivialNewNodeWindow.h
+				app/Gui/Windows/TrivialNewNodeWindow.cpp
 				
 				
 				app/Gui/PropertyWidgets/ITrivialPropertyWidget.h

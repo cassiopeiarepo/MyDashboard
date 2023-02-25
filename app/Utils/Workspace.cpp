@@ -40,7 +40,7 @@
 
 void Workspace::init(QString _dir) {
 
-    //TypeSystem::get()->init();
+    TypeSystem::get()->init();
 
 	//loadDefaultFile(_dir);
 
@@ -56,6 +56,7 @@ void Workspace::init(QString _dir) {
     NodeText* text1 = new NodeText();
     text1->setObjectName("Text1");
     text1->setParent(dummy1);
+
 
     NodeLink* link1 = new NodeLink();
     link1->setObjectName("Link11");
@@ -81,6 +82,7 @@ void Workspace::init(QString _dir) {
     image1->setObjectName("image1");
     image1->setParent(dummy1);
     image1->setPath("D:/Tapety/pexels-errin-casano-2356045.jpg");
+
 
     /*
     NodeAudio* audio1 = new NodeAudio();

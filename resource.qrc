@@ -7,5 +7,17 @@
         <file>ui/icons/play_arrow_FILL0_wght400_GRAD0_opsz48.png</file>
         <file>ui/icons/close_fullscreen_FILL0_wght400_GRAD0_opsz48.png</file>
         <file>ui/icons/fullscreen_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/article_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/crop_square_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/format_h1_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/format_h2_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/format_h3_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/note_add_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/share_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/variables_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/image_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/movie_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/music_note_FILL0_wght400_GRAD0_opsz48.png</file>
+        <file>ui/icons/remove_FILL0_wght400_GRAD0_opsz48.png</file>
     </qresource>
 </RCC>

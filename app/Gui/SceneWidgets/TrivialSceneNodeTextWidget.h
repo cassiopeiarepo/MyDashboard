@@ -5,6 +5,7 @@
 #include "app/Nodes/Basic/NodeText.h"
 
 #include <QTextEdit>
+#include <QTextBlock>
 #include <QAbstractTextDocumentLayout>
 
 class TrivialSceneNodeTextWidget : public QTextEdit, public ITrivialSceneWidget {
@@ -18,6 +19,23 @@ public:
 
         setFrameStyle(0);
         setFrameShape(QFrame::NoFrame);
+
+        /*
+        QTextCursor cursor = textCursor();
+        QTextBlockFormat format;
+        format.setLineHeight(120, QTextBlockFormat::ProportionalHeight);
+        cursor.setBlockFormat(format);
+        */
+
+        //QTextBlockFormat format = document()->begin().blockFormat();
+        //format.setLineHeight(120, QTextBlockFormat::ProportionalHeight);
+        //document()->begin() = format;//.setBlockFormat(format);
+
+        //QTextOption option = document()->defaultTextOption();
+        //option.setLineHeight(120, QTextOption::LineHeightMode::ProportionalHeight);
+        //document()->setDefaultTextOption(option);
+
+        //setLineHeight(1.2);
 
         //setStyleSheet("QTextEdit { margin: 0px; }");
 

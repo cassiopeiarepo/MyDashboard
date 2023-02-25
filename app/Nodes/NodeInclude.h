@@ -8,7 +8,8 @@ class NodeInclude : public NodeBase {
 	Q_OBJECT
 public:
 
-	virtual void LoadTml(TmlNode* node);
+    void LoadTml(TmlNode* node) override;
+    void SaveTml(TmlNode* node) override;
 
 	virtual QString getClassName() { return "include"; }
 

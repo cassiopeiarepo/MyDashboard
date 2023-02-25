@@ -57,7 +57,11 @@ public slots:
     void aboutTiHideOptionsMenu();
     void recreateOptionsMenu();
 
-    void onOptionEdit();
+    void onOptionNewNode();
+    void onOptionCut();
+    void onOptionCopy();
+    void onOptionPaste();
+    void onOptionProperties();
 
 private:
     NodeBase* object;
@@ -104,6 +108,9 @@ public:
 signals:
     void goChild(NodeBase* child);
 
+public slots:
+    void aboutTiHideAddMenu();
+    void recreateAddMenu();
 
 private:
     NodeBase* selected;
@@ -117,9 +124,13 @@ private:
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
 
+    QToolButton *addToolButton;
     QWidget* expand_widget;
 
     int clientWidth;
+
+    QMenu* addMenu;
+    void createAddMenu();
 
     void createWidget();
 

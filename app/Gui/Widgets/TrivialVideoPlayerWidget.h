@@ -32,6 +32,7 @@ protected slots:
     void toogleFullscren();
     void positionChanged(qint64 position);
     void volumeSliderChange(int vol);
+    void videoFrameChanged();
 
 private:
 
