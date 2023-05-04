@@ -23,7 +23,8 @@ class TrivialSceneComplexView;
 class TrivialSceneTreeView;
 class TrivialMainView;
 class TrivialObjectTreePropView;
-
+class TrivialGraphicsView;
+class TrivialSignalSlotView;
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -37,6 +38,10 @@ class TrivialObjectTreePropView;
 
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
+
+
+
+
 
 
 class Ui_MainMenuMini
@@ -256,6 +261,8 @@ private:
     QTabWidget* bottom_right;
     CentralWidget* panel_central;
 
+    TrivialGraphicsView* graphics_view;
+    TrivialSignalSlotView* sig_slot_view;
     TrivialObjectTreePropView* obj_tree_prop;
     TrivialDirExplorer* dir_explorer;
     TrivialDocumentsView* doc_view;

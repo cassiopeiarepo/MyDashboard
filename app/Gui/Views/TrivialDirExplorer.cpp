@@ -19,6 +19,9 @@ TrivialDirExplorer::TrivialDirExplorer() {
 
     //model->setRootPath("d:/Workscpace");
     model->setRootPath(QDir::currentPath());
+    //model->setRootPath("D:\\Workspace");
+    model->setFilter(QDir::AllEntries | QDir::NoDotAndDotDot);
+
     setModel(model);
     hideColumn(1);
     hideColumn(2);

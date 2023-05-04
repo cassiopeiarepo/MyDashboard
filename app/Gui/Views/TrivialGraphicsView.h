@@ -12,16 +12,19 @@ class TrivialGraphicsView : public QGraphicsView {
 public:
 	TrivialGraphicsView();
 
+    void init();
+
+
 	void wheelEvent(QWheelEvent*) override;
 
-	void mouseDoubleClickEvent(QMouseEvent* event) override;
+    //void mouseDoubleClickEvent(QMouseEvent* event) override;
 	void mouseMoveEvent(QMouseEvent* event) override;
 	void mousePressEvent(QMouseEvent* event) override;
 	void mouseReleaseEvent(QMouseEvent* event) override;
-
+/*
 	void keyPressEvent(QKeyEvent* event) override;
 	void keyReleaseEvent(QKeyEvent* event) override;
-
+*/
 	float getZoom() { return zoom; }
 	void setZoom(float new_zoom) { zoom = new_zoom; update_transform(); }
 
@@ -50,8 +53,14 @@ private:
 	QPointF p1, center1;
 
 	QGraphicsItem* focusItem;
+    QWidget* focusWidget;
 	QGraphicsItem* mouseItem;
 	QFileSystemWatcher* watcher;
+
+    QWidget* find_widget_wid;
+    QPoint find_widget_pos;
+
+    void findWidgetAndPos(QWidget* parent, QPoint pos);
 };
 
 #endif // TRIVIAL_GRAPHICS_VIEW_H

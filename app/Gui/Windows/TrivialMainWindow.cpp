@@ -26,10 +26,13 @@
 #include "app/Gui/Views/TrivialSceneView.h"
 #include "app/Gui/Views/TrivialSceneTreeView.h"
 #include "app/Gui/Views/TrivialMainView.h"
+#include "app/Gui/Views/TrivialGraphicsView.h"
+#include "app/Gui/Views/TrivialSignalSlotView.h"
 
 #include "app/Utils/Log.h"
 #include "app/Utils/Gui.h"
 #include "app/Utils/Workspace.h"
+#include "app/Utils/GitHubRepoSync/GitHubRepoSync.h"
 
 
 TrivialMainWindow::TrivialMainWindow(QWidget* parent) {
@@ -60,6 +63,8 @@ void TrivialMainWindow::createGui() {
 		dir_explorer = new TrivialDirExplorer();
 		doc_view = TrivialDocumentsView::get();
 		script_view = new TrivialScriptView();
+        graphics_view = new TrivialGraphicsView();
+        sig_slot_view = new TrivialSignalSlotView();
 	}
 
 
@@ -95,7 +100,9 @@ void TrivialMainWindow::createGui() {
         createDesktopPanels();
 
         addPanel(PanelPlace::LEFT, QString("Workspace"), dir_explorer);
-        addPanel(PanelPlace::CENTER, QString("Documents"), doc_view);
+        //addPanel(PanelPlace::CENTER, QString("Documents"), doc_view);
+        //addPanel(PanelPlace::CENTER, QString("Graphics"), graphics_view);
+        addPanel(PanelPlace::CENTER, QString("SignalSlot"), sig_slot_view);
         addPanel(PanelPlace::RIGHT, QString("Object"), obj_tree_prop);
 
         addPanel(PanelPlace::BOTTOM_LEFT, QString("Script"), script_view);
@@ -133,11 +140,56 @@ void TrivialMainWindow::updateGui() {
 void TrivialMainWindow::init() {
     if (Gui::get()->getSize() == Gui::GUI_MINI) {
         scene_tree_view->setRoot(Workspace::get()->getRoot());
+        scene_view_complex->select(Workspace::get()->getRoot());
     }    else if (Gui::get()->getSize() == Gui::GUI_MIDI) {
 
     } else if (Gui::get()->getSize() == Gui::GUI_MAXI && Gui::get()->isDesktop()) {
         obj_tree_prop->setRoot(Workspace::get()->getRoot());
+        graphics_view->init();
     }
+
+    /*
+    //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
+    Repo repo("cassiopeiarepo", "test_send", "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");
+
+    //repo.repoCommit1();
+
+    QList<FileOp> opList;
+
+    //opList.append(FileOp(FileOp::OP_ADD, "dir1/file1.txt", "d:/test_plik1.txt", ""));
+    //opList.append(FileOp(FileOp::OP_ADD, "dir1/file2.txt", "d:/test_plik2.txt", ""));
+
+    opList.append(FileOp(FileOp::OP_MOD, "dir1/file1.txt", "d:/test_plik3.txt", ""));
+    opList.append(FileOp(FileOp::OP_ADD, "dir1/file3.txt", "d:/test_send/sample-mov-file.mov", ""));
+    opList.append(FileOp(FileOp::OP_DEL, "dir1/file2.txt", "", ""));
+
+    repo.repoPut(opList, "Add 2 files");
+
+    */
+
+    //QString sha = repo.repoGetHeadMain();
+
+    //QString sha = repo.repoGetShaOfFilInLastCommit("dir_test2/plik1.txt");
+
+    //qDebug() << sha;
+
+    // listing plików/podkatalogów w katologu
+    //repo.repoListFilesinDir("");
+    //repo.repoListFilesinDir("dir_test");
+
+    // list wszystkich plików w repo
+    //repo.repoListAllFiles();
+
+    // usuniecie pliku potzrebna suma kontrolna
+    //repo.repoDeleteFile("test2.mov", "d:/test_send/sample-mov-file.mov");
+
+    // dodanie pliku do repo
+    //repo.repoAddFile("d:/test_plik1.txt", "dir_test2/plik1.txt");
+
+    //qDebug() << "repo sha" << repo.repoGetShaOfFile("sample-mov-file.mov");
+    //qDebug() << "file sha" << repo.getShaOfFile("d:/test_send/sample-mov-file.mov");
+
+
 }
 
 void TrivialMainWindow::deleteCentralWidgetChilds() {

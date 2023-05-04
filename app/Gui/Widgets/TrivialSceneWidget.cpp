@@ -3,7 +3,7 @@
 #include "app/Gui/Windows/TrivialQObjectPropertyWindow.h"
 #include "app/Gui/SceneWidgets/ITrivialSceneWidget.h"
 
-
+#include "app/Utils/Gui.h"
 #include "app/Utils/TypeDef.h"
 
 TrivialSceneItemWidget::TrivialSceneItemWidget(TrivialSceneWidget* _sene_widget, NodeBase* obj) : QWidget(NULL) , object(obj),
@@ -90,7 +90,7 @@ void TrivialSceneItemWidget::createOptionsMenu() {
     if (optionsMenu)
         delete optionsMenu;
 
-    optionsMenu = new QMenu(this);
+    optionsMenu = new QMenu(Gui::get()->getMainWindow());
 
     QAction* action = optionsMenu->addAction("New Node");
     QObject::connect(action, &QAction::triggered, this, &TrivialSceneItemWidget::onOptionNewNode);
@@ -226,6 +226,7 @@ void TrivialSceneWidget::createWidget() {
     QIcon _icon;
     _icon.addFile(":/icons/ui/icons/add_FILL0_wght400_GRAD0_opsz48.png", QSize(), QIcon::Normal, QIcon::Off);
     addToolButton->setIcon(_icon);
+    addToolButton->setObjectName("addToolButton");
 
     expand_widget = new QWidget(this);
     QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -260,7 +261,6 @@ void TrivialSceneWidget::rebuildChilds() {
         verticalLayout->addWidget(child);
     }
 
-
     verticalLayout->addWidget(addToolButton);
     verticalLayout->addWidget(expand_widget);
 }
@@ -269,7 +269,7 @@ void TrivialSceneWidget::createAddMenu() {
     if (addMenu)
         delete addMenu;
 
-    addMenu = new QMenu(this);
+    addMenu = new QMenu(Gui::get()->getMainWindow());
 
     QAction* action = addMenu->addAction("New Node");
     //QObject::connect(action, &QAction::triggered, this, &TrivialSceneItemWidget::onOptionNewNode);

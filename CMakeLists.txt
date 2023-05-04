@@ -42,6 +42,8 @@ set(PROJECT_SOURCES
                 app/Utils/Gui.cpp
 				app/Utils/SceneUtils.h
 				app/Utils/SceneUtils.cpp
+				app/Utils/GitHubRepoSync/GitHubRepoSync.h
+				app/Utils/GitHubRepoSync/GitHubRepoSync.cpp
 				
 				
 				app/Nodes/UI/NodeUi.h
@@ -125,14 +127,14 @@ set(PROJECT_SOURCES
 				
                 app/Gui/Views/TrivialTextEditor.h
                 app/Gui/Views/TrivialTextEditor.cpp
-				#app/Gui/Views/TrivialGraphicsView.h
-                #app/Gui/Views/TrivialGraphicsView.cpp
-				#app/Gui/Views/TrivialGraphicsItem.h
-				#app/Gui/Views/TrivialGraphicsItem.cpp
-				#app/Gui/Views/TrivialGuiItems.h
-				#app/Gui/Views/TrivialGuiItems.cpp
-				#app/Gui/Views/TrivialTextItem.h
-                #app/Gui/Views/TrivialTextItem.cpp
+				app/Gui/Views/TrivialGraphicsView.h
+                app/Gui/Views/TrivialGraphicsView.cpp
+				app/Gui/Views/TrivialGraphicsItem.h
+				app/Gui/Views/TrivialGraphicsItem.cpp
+				app/Gui/Views/TrivialGuiItems.h
+				app/Gui/Views/TrivialGuiItems.cpp
+				app/Gui/Views/TrivialTextItem.h
+                app/Gui/Views/TrivialTextItem.cpp
 				app/Gui/Views/TrivialDirExplorer.h
 				app/Gui/Views/TrivialDirExplorer.cpp
 				app/Gui/Views/TrivialDocumentsView.h

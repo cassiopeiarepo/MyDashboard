@@ -7,9 +7,12 @@
 #include <QGraphicsProxyWidget>
 #include <QGraphicsView>
 #include <QLineEdit>
+#include <QApplication>
+
 #include "TrivialTextEditor.h"
 #include "TrivialGraphicsView.h"
 
+#include "app/Gui/Widgets/TrivialSceneWidget.h"
 
 class TestWidget : public QWidget {
 	Q_OBJECT
@@ -50,10 +53,12 @@ protected:
 };
 
 
+
+
 class MouseTestWidget : public QWidget {
 	Q_OBJECT
 public:
-	MouseTestWidget() : QWidget() {
+    MouseTestWidget(QWidget* parent = NULL) : QWidget(parent) {
 		this->setMouseTracking(true);
 	}
 
@@ -75,6 +80,35 @@ protected:
 	}
 
 	QPointF mouseMovePos;
+};
+
+class ComplexMouseTestWidget : public QWidget {
+    Q_OBJECT
+public:
+    ComplexMouseTestWidget() : QWidget(NULL) {
+        gridLayout = new QGridLayout(this);
+        verticalLayout = new QVBoxLayout();
+
+        edit1 = new QLineEdit(this);
+        verticalLayout->addWidget(edit1);
+
+        test_wid = new MouseTestWidget(this);
+        verticalLayout->addWidget(test_wid);
+
+        edit2 = new QLineEdit(this);
+        verticalLayout->addWidget(edit2);
+
+        gridLayout->addLayout(verticalLayout, 0, 0, 1, 1);
+    }
+
+private:
+    QGridLayout *gridLayout;
+    QVBoxLayout *verticalLayout;
+
+
+    QLineEdit* edit1;
+    MouseTestWidget* test_wid;
+    QLineEdit* edit2;
 };
 
 class TrivProxyWidget {
@@ -109,7 +143,7 @@ protected:
 
 };
 
-/*
+
 class TrivMouseTestWidget : public MouseTestWidget, public TrivProxyWidget {
 	Q_OBJECT
 public:
@@ -118,20 +152,63 @@ public:
 	}
 
 protected:
+    /*
 	void mouseMoveEvent(QMouseEvent* event) override {
-		event->setLocalPos(mapPoint(event->pos()));
-		MouseTestWidget::mouseMoveEvent(event);
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseMove, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        //MouseTestWidget::mouseMoveEvent(event2);
+        QApplication::sendEvent(this, event2);
 	}
 
 	void mousePressEvent(QMouseEvent* event) override {
-		event->setLocalPos(mapPoint(event->pos()));
-		MouseTestWidget::mousePressEvent(event);
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseButtonPress, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        MouseTestWidget::mousePressEvent(event2);
 	}
 
 	void mouseReleaseEvent(QMouseEvent* event) override {
-		event->setLocalPos(mapPoint(event->pos()));
-		MouseTestWidget::mouseReleaseEvent(event);
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseButtonRelease, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        MouseTestWidget::mouseReleaseEvent(event2);
 	}
+    */
+};
+
+
+class TrivComplexMouseTestWidget : public ComplexMouseTestWidget, public TrivProxyWidget {
+    Q_OBJECT
+public:
+    TrivComplexMouseTestWidget() : ComplexMouseTestWidget(), TrivProxyWidget(){
+        proxy->setWidget(this);
+    }
+
+protected:
+    /*
+    void mouseMoveEvent(QMouseEvent* event) override {
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseMove, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        //MouseTestWidget::mouseMoveEvent(event2);
+        QApplication::sendEvent(this, event2);
+    }
+
+    void mousePressEvent(QMouseEvent* event) override {
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseButtonPress, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        MouseTestWidget::mousePressEvent(event2);
+    }
+
+    void mouseReleaseEvent(QMouseEvent* event) override {
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseButtonRelease, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        MouseTestWidget::mouseReleaseEvent(event2);
+    }
+    */
 };
 
 class TrivProxyCheckBox : public QCheckBox, public TrivProxyWidget {
@@ -142,20 +219,26 @@ public:
 	}
 
 protected:
-	void mouseMoveEvent(QMouseEvent* event) override {
-		event->setLocalPos(mapPoint(event->pos()));
-		QCheckBox::mouseMoveEvent(event);
-	}
+    void mouseMoveEvent(QMouseEvent* event) override {
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseMove, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        QCheckBox::mouseMoveEvent(event2);
+    }
 
-	void mousePressEvent(QMouseEvent* event) override {
-		event->setLocalPos(mapPoint(event->pos()));
-		QCheckBox::mousePressEvent(event);
-	}
+    void mousePressEvent(QMouseEvent* event) override {
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseButtonPress, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        QCheckBox::mousePressEvent(event2);
+    }
 
-	void mouseReleaseEvent(QMouseEvent* event) override {
-		event->setLocalPos(mapPoint(event->pos()));
-		QCheckBox::mouseReleaseEvent(event);
-	}
+    void mouseReleaseEvent(QMouseEvent* event) override {
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseButtonRelease, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        QCheckBox::mouseReleaseEvent(event2);
+    }
 
 };
 
@@ -167,21 +250,26 @@ public:
 	}
 
 protected:
-	void mouseMoveEvent(QMouseEvent* event) override {
-		event->setLocalPos(mapPoint(event->pos()));
-		TrivialTextEditor::mouseMoveEvent(event);
-	}
+    void mouseMoveEvent(QMouseEvent* event) override {
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseMove, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        TrivialTextEditor::mouseMoveEvent(event2);
+    }
 
-	void mousePressEvent(QMouseEvent* event) override {
-		setFocusItem();
-		event->setLocalPos(mapPoint(event->pos()));
-		TrivialTextEditor::mousePressEvent(event);
-	}
+    void mousePressEvent(QMouseEvent* event) override {
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseButtonPress, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        TrivialTextEditor::mousePressEvent(event2);
+    }
 
-	void mouseReleaseEvent(QMouseEvent* event) override {
-		event->setLocalPos(mapPoint(event->pos()));
-		TrivialTextEditor::mouseReleaseEvent(event);
-	}
+    void mouseReleaseEvent(QMouseEvent* event) override {
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseButtonRelease, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        TrivialTextEditor::mouseReleaseEvent(event2);
+    }
 
 };
 
@@ -193,23 +281,36 @@ public:
 	}
 
 protected:
-	void mouseMoveEvent(QMouseEvent* event) override {
-		event->setLocalPos(mapPoint(event->pos()));
-		QLineEdit::mouseMoveEvent(event);
-	}
+    void mouseMoveEvent(QMouseEvent* event) override {
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseMove, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        QLineEdit::mouseMoveEvent(event2);
+    }
 
-	void mousePressEvent(QMouseEvent* event) override {
-		setFocusItem();
-		event->setLocalPos(mapPoint(event->pos()));
-		QLineEdit::mousePressEvent(event);
-	}
+    void mousePressEvent(QMouseEvent* event) override {
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseButtonPress, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        QLineEdit::mousePressEvent(event2);
+    }
 
-	void mouseReleaseEvent(QMouseEvent* event) override {
-		event->setLocalPos(mapPoint(event->pos()));
-		QLineEdit::mouseReleaseEvent(event);
-	}
+    void mouseReleaseEvent(QMouseEvent* event) override {
+        QMouseEvent* event2 = new QMouseEvent(QEvent::MouseButtonRelease, mapPoint(event->pos()),
+            event->windowPos(), event->screenPos(), event->button(), event->buttons(), event->modifiers());
+        //event->setLocalPos(mapPoint(event->pos()));
+        QLineEdit::mouseReleaseEvent(event2);
+    }
 
 };
-*/
+
+class TrivProxySceneWidget : public TrivialSceneWidget, public TrivProxyWidget {
+    Q_OBJECT
+public:
+    TrivProxySceneWidget() : TrivialSceneWidget(NULL, 300), TrivProxyWidget() {
+        proxy->setWidget(this);
+    }
+
+};
 
 #endif // TRIVIAL_GUI_ITEMS_H

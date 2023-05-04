@@ -221,7 +221,8 @@ public:
 		}
 
 		if (node->isArg("text")) {
-			setText(node->getArgValue("text"));
+            QString arg = node->getArgValue("text");
+            setText(arg);
 		}
 
 		if (node->isArg("goto_pos")) {
@@ -298,7 +299,8 @@ public:
 			return false;
 
 		if (node->isArg("abs_path")) {
-			setFilename(node->getArgValue("abs_path"));
+            QString arg = node->getArgValue("abs_path");
+            setFilename(arg);
 		}
 
 		return true;
